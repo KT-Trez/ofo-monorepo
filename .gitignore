@@ -1,12 +1,33 @@
-# build artifacts
-/*.apk
-/android
-/dist
+# artifacts
+/apps/**/dist/
+/apps/**/*.tsbuildinfo
 
 # dependencies
-/.env
-/.expo
-/node_modules
+/node_modules/
+/apps/**/node_modules/
+/packages/**/node_modules/
+
+# expo
+/apps/symfi-mobile/android/
+/apps/symfi-mobile/ios/
+/apps/symfi-mobile/web-build/
+/apps/symfi-mobile/.expo
+/apps/symfi-mobile/.metro-health-check*
+/apps/symfi-mobile/expo-env.d.ts
 
 # editors
-/.idea
+/.idea/
+!/.idea/biome.xml
+
+# env
+/**/.env.local
+/**/.env.*.local
+
+# react native
+/apps/symfi-mobile/.kotlin/
+/apps/symfi-mobile/*.orig.*
+/apps/symfi-mobile/*.jks
+/apps/symfi-mobile/*.p8
+/apps/symfi-mobile/*.p12
+/apps/symfi-mobile/*.key
+/apps/symfi-mobile/*.mobileprovision

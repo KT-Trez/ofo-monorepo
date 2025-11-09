@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@symfi/ts-config": "*"
+  },
+  "exports": {
+    "./helpers.js": "./src/helpers.ts"
+  },
+  "name": "@symfi/types",
+  "scripts": {
+    "lint": "biome lint",
+    "lint:fix": "biome check --write",
+    "serve": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module"
+}

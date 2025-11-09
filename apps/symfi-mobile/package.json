@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@symfi/types": "*",
+    "@symfi/utils": "*",
+    "expo": "~54.0.23",
+    "expo-status-bar": "~3.0.8",
+    "react": "19.1.0",
+    "react-native": "0.81.5"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.0",
+    "typescript": "~5.9.2"
+  },
+  "main": "index.ts",
+  "name": "@symfi/mobile",
+  "private": true,
+  "repository": {
+    "directory": "apps/symfi-mobile",
+    "type": "git",
+    "url": "github:KT-Trez/symfi"
+  },
+  "scripts": {
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "start": "expo start",
+    "web": "expo start --web"
+  },
+  "version": "2.0.0-4"
+}

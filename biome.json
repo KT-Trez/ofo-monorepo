@@ -1,0 +1,66 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
+      }
+    },
+    "enabled": true
+  },
+  "files": {
+    "includes": [
+      "**/apps/**/*.css",
+      "**/apps/**/*.js",
+      "**/apps/**/*.jsx",
+      "**/apps/**/*.json",
+      "**/apps/**/*.ts",
+      "**/apps/**/*.tsx",
+      "**/packages/**/*.css",
+      "**/packages/**/*.js",
+      "**/packages/**/*.jsx",
+      "**/packages/**/*.json",
+      "**/packages/**/*.ts",
+      "**/packages/**/*.tsx",
+      "**/*.js",
+      "**/*.json",
+      "**/*.ts"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "asNeeded",
+      "enabled": true,
+      "quoteStyle": "single"
+    },
+    "globals": []
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "overrides": [],
+  "vcs": {
+    "clientKind": "git",
+    "defaultBranch": "master",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
+}

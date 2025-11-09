@@ -1,0 +1,10 @@
+{
+  "exports": {
+    "tsconfig.base.json": "./src/tsconfig.base.json",
+    "tsconfig.lib.json": "./src/tsconfig.lib.json",
+    "tsconfig.node.json": "./src/tsconfig.node.json",
+    "tsconfig.vite.json": "./src/tsconfig.vite.json"
+  },
+  "name": "@symfi/ts-config",
+  "type": "module"
+}

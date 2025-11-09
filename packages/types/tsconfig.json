@@ -1,0 +1,4 @@
+{
+  "extends": "@symfi/ts-config/src/tsconfig.lib.json",
+  "include": ["src"]
+}

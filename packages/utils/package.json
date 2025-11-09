@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@symfi/types": "*"
+  },
+  "devDependencies": {
+    "@symfi/ts-config": "*"
+  },
+  "exports": {
+    "./exhaustiveCheck.js": "./src/exhaustiveCheck.ts",
+    "./keyBy.js": "./src/keyBy.ts",
+    "./noop.js": "./src/noop.ts"
+  },
+  "name": "@symfi/utils",
+  "scripts": {
+    "lint": "biome lint",
+    "lint:fix": "biome check --write",
+    "serve": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module"
+}
