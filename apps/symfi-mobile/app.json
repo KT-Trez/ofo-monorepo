@@ -14,9 +14,9 @@
     "orientation": "portrait",
     "slug": "symfi-mobile",
     "splash": {
+      "backgroundColor": "#ffffff",
       "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "contain"
     },
     "userInterfaceStyle": "light",
     "version": "1.0.0",
