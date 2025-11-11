@@ -1,6 +1,7 @@
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { DataSourceProvider } from './components/DataSourceProvider/DataSourceProvider';
 
 SplashScreen.preventAutoHideAsync().catch(console.error);
 
@@ -15,5 +16,9 @@ export default function RootLayout() {
   //   return null;
   // }
 
-  return <Stack />;
+  return (
+    <DataSourceProvider database="symfi.db">
+      <Stack />
+    </DataSourceProvider>
+  );
 }

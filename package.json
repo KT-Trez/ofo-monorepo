@@ -17,6 +17,7 @@
   "keywords": [],
   "license": "MIT",
   "name": "@symfi/monorepo",
+  "packageManager": "npm@11.6.1",
   "private": true,
   "repository": {
     "type": "git",
