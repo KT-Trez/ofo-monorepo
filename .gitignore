@@ -1,10 +1,9 @@
-# dependencies
-/.expo/
-/node_modules/
+# artifacts
+/**/dist/
 
-# dist
-/dist/
-/web-build/
+# dependencies
+/node_modules/
+/**/node_modules/
 
 # editors
 /.idea
