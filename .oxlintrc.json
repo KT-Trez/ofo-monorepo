@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "perf": "error",
+    "pedantic": "error",
+    "suspicious": "error",
+    "style": "error"
+  },
+  "env": {
+    "builtin": true,
+    "es2022": true
+  },
+  "globals": {},
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/build/**",
+    "**/node_modules/**",
+    "**/*.gen.ts",
+    "**/routeTree.gen.ts"
+  ],
+  "plugins": ["import", "jsdoc", "oxc", "promise", "typescript", "vitest"],
+  "rules": {
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+    "import/no-cycle": "error",
+    "import/no-unused-modules": "error",
+    "no-constant-condition": "error",
+    "no-debugger": "error",
+    "no-implicit-any": "error",
+    "no-inner-declarations": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": "error",
+    "require-yield": "error",
+    "sort-keys": "error",
+    "typescript/explicit-function-return-types": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-unused-vars": "error"
+  },
+  "settings": {}
+}

@@ -1,5 +1,7 @@
 # artifacts
+/**/.turbo/
 /**/dist/
+/**/generated/*
 
 # dependencies
 /node_modules/
@@ -7,3 +9,6 @@
 
 # editors
 /.idea
+
+# env
+/**/.env*

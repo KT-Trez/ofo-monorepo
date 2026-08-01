@@ -1,17 +1,32 @@
 {
+  "name": "@ofo/monorepo",
+  "version": "4.0.0",
+  "private": true,
+  "keywords": [],
+  "license": "MIT",
   "author": {
     "name": "Bartłomiej 'Trez' Wąś"
   },
-  "dependencies": {},
-  "description": "",
-  "devDependencies": {},
-  "keywords": [],
-  "license": "MIT",
-  "name": "@ofo/monorepo",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "github:KT-Trez/ofo-monorepo"
   },
-  "version": "4.0.0"
+  "scripts": {
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt --write",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
+    "turbo": "^2.10.5",
+    "unplugin-swc": "catalog:",
+    "vitest": "catalog:"
+  },
+  "packageManager": "pnpm@11.17.0"
 }
