@@ -1,14 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["DATABASE_URL"],
   "tasks": {
     "//#format": {},
     "//#format:fix": {
       "cache": false
     },
-    "//#lint": {
-      "dependsOn": ["^build"]
-    },
+    "//#lint": {},
     "//#lint:fix": {
       "cache": false
     },
@@ -26,25 +23,13 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build", "^db:generate"]
-    },
-    "db:deploy": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false
-    },
-    "db:migrate": {
-      "cache": false
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
-      "dependsOn": ["^db:generate"],
       "persistent": true
     },
-    "typecheck": {
-      "cache": true,
-      "dependsOn": ["^typecheck"]
-    }
+    "typecheck": {}
   }
 }

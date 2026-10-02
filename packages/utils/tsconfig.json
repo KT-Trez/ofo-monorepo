@@ -1,8 +1,7 @@
 {
+  "extends": "@ofo/typescript-config/tsconfig.library.json",
   "compilerOptions": {
-    "outDir": "dist",
     "types": ["node"]
   },
-  "extends": "@ofo/typescript-config/tsconfig.node.json",
   "include": ["src"]
 }

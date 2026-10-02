@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AuthorApi } from '@ofo/types/author';
-import type { VideoApi } from '@ofo/types/video';
 import Innertube, { Misc, Types, YTNodes } from 'youtubei.js';
+import type { AuthorApi } from '@ofo/types/author';
+import type { VideoApi } from '@ofo/types/video';
 import { INNER_TUBE_TOKEN } from '../inner-tube/inner-tube.module.js';
 
 @Injectable()

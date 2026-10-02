@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    "./*": {
-      "types": "./src/*.ts",
-      "default": "./dist/*.js"
-    }
+    "./*": "./src/*.ts"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

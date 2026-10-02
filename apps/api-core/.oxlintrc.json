@@ -1,9 +1,10 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
+  "extends": ["../../.oxlintrc.json"],
   "env": {
-    "builtin": true,
-    "es2022": true,
     "node": true
   },
-  "rules": {}
+  "rules": {
+    "typescript/no-extraneous-class": ["error", { "allowWithDecorator": true }]
+  }
 }

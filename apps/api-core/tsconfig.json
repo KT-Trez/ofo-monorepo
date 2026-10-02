@@ -1,7 +1,6 @@
 {
   "extends": "@ofo/typescript-config/tsconfig.nest.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": "./"
+    "outDir": "./dist"
   }
 }

@@ -12,13 +12,16 @@
     "url": "github:KT-Trez/ofo-monorepo"
   },
   "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
     "format": "oxfmt --check",
     "format:fix": "oxfmt --write",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
     "@swc/core": "catalog:",
@@ -27,6 +30,9 @@
     "turbo": "^2.10.5",
     "unplugin-swc": "catalog:",
     "vitest": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   },
   "packageManager": "pnpm@11.17.0"
 }

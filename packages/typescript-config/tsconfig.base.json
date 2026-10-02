@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "allowJs": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "module": "NodeNext",
@@ -10,7 +9,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": true,
     "target": "es2024"
   }
 }

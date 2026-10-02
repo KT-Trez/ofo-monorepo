@@ -1,5 +1,5 @@
-import { Test, type TestingModule } from '@nestjs/testing';
 import { randomInt } from 'crypto';
+import { Test, type TestingModule } from '@nestjs/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { YoutubeQueryDto } from './dto/youtube-query.dto.js';
 import { SearchController } from './search.controller.js';
@@ -7,12 +7,14 @@ import { YoutubeService } from './youtube.service.js';
 
 describe('SearchController', () => {
   let controller: SearchController;
-  const formatFeedItemMock = vi.fn().mockReturnValue(null);
-  const getVideosByPhraseMock = vi.fn().mockResolvedValue({ videos: [] });
+  const formatFeedItemMock = vi.fn<(item: unknown) => unknown>().mockReturnValue(null);
+  const getVideosByPhraseMock = vi
+    .fn<(phrase: string, filters: object) => Promise<{ videos: unknown[] }>>()
+    .mockResolvedValue({ videos: [] });
   const queryMock: YoutubeQueryDto = {
     q: 'q-mock',
   };
-  const youtubeServiceMock: Partial<YoutubeService> = {
+  const youtubeServiceMock = {
     formatFeedItem: formatFeedItemMock,
     getVideosByPhrase: getVideosByPhraseMock,
   };

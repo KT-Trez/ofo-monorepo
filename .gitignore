@@ -1,7 +1,7 @@
 # artifacts
 /**/.turbo/
 /**/dist/
-/**/generated/*
+*.tsbuildinfo
 
 # dependencies
 /node_modules/
@@ -12,3 +12,6 @@
 
 # env
 /**/.env*
+
+# test
+/**/coverage/

@@ -1,4 +1,4 @@
-import type { AuthorApi } from './author.js';
+import type { AuthorApi } from './author.ts';
 
 export type VideoApi = {
   author: AuthorApi;

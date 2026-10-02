@@ -20,22 +20,22 @@ describe('YoutubeQueryDto', () => {
     {
       description: 'valid duration',
       query: {
-        q: qMock,
         duration: 'under_three_mins',
+        q: qMock,
       },
     },
     {
       description: 'valid features',
       query: {
-        q: qMock,
         features: ['hd', 'subtitles'],
+        q: qMock,
       },
     },
     {
       description: 'valid prioritize',
       query: {
-        q: qMock,
         prioritize: 'relevance',
+        q: qMock,
       },
     },
     {
@@ -77,29 +77,29 @@ describe('YoutubeQueryDto', () => {
     {
       description: 'invalid duration',
       query: {
-        q: qMock,
         duration: 'invalid-duration',
+        q: qMock,
       },
     },
     {
       description: 'invalid features',
       query: {
-        q: qMock,
         features: ['invalid-feature'],
+        q: qMock,
       },
     },
     {
       description: 'invalid features with a valid entry',
       query: {
-        q: qMock,
         features: ['hd', 'invalid-feature'],
+        q: qMock,
       },
     },
     {
       description: 'invalid prioritize',
       query: {
-        q: qMock,
         prioritize: 'invalid-priority',
+        q: qMock,
       },
     },
     {

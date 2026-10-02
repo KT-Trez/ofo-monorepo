@@ -1,4 +1,0 @@
-{
-  "extends": "@ofo/typescript-config/tsconfig.node.json",
-  "include": ["prisma.config.ts", "src"]
-}

@@ -13,7 +13,7 @@ const bootstrap = async () => {
 
   app.enableVersioning({ type: VersioningType.URI });
   await app.listen(config.port);
-  
+
   logger.log(`Nest application listening (port="${config.port}")`);
 };
 
