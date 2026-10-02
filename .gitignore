@@ -3,6 +3,9 @@
 /**/dist/
 *.tsbuildinfo
 
+# caches
+/**/.cache/
+
 # dependencies
 /node_modules/
 /**/node_modules/
@@ -12,6 +15,7 @@
 
 # env
 /**/.env*
+!/**/.env*.example
 
 # test
 /**/coverage/

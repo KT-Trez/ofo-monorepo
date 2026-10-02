@@ -1,0 +1,13 @@
+# context = repo root
+**/.cache
+**/.turbo
+**/coverage
+**/dist
+**/node_modules
+**/*.tsbuildinfo
+.git
+.idea
+
+# secrets
+**/.env
+**/.env.*
