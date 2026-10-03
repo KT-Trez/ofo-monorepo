@@ -371,6 +371,9 @@ importers:
       semver:
         specifier: 'catalog:'
         version: 7.8.5
+      type-fest:
+        specifier: 'catalog:'
+        version: 5.10.0
       youtubei.js:
         specifier: 'catalog:'
         version: 17.2.0

@@ -22,6 +22,7 @@
   ],
   "plugins": ["import", "jsdoc", "oxc", "promise", "typescript", "unicorn", "vitest"],
   "rules": {
-    "sort-keys": "error"
+    "sort-keys": "error",
+    "vitest/require-mock-type-parameters": "off"
   }
 }
