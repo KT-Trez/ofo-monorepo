@@ -5,10 +5,10 @@ import {
   HealthCheckService,
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
-import { Public } from '../auth/public.decorator.js';
+import { AuthPublic } from '../auth/auth-public.decorator.ts';
 import { HealthRegistryService } from './health-registry.service.js';
 
-@Public()
+@AuthPublic()
 @Controller({ path: 'health', version: '4' })
 export class HealthController {
   constructor(
