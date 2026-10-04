@@ -1,7 +1,14 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "arrowParens": "avoid",
-  "ignorePatterns": ["**/dist/**", "**/drizzle/meta/**", "**/node_modules/**", "**/*.gen.ts"],
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/generated/**",
+    "**/node_modules/**",
+    "**/*.gen.ts",
+    "contract/openapi.yaml",
+    "packages/server-client/src/schema.ts"
+  ],
   "proseWrap": "always",
   "singleQuote": true,
   "sortImports": {

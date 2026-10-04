@@ -17,8 +17,10 @@
     "**/build/**",
     "**/coverage/**",
     "**/dist/**",
+    "**/generated/**",
     "**/node_modules/**",
-    "**/*.gen.ts"
+    "**/*.gen.ts",
+    "packages/server-client/src/schema.ts"
   ],
   "plugins": ["import", "jsdoc", "oxc", "promise", "typescript", "unicorn", "vitest"],
   "rules": {

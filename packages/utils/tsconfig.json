@@ -1,7 +1,0 @@
-{
-  "extends": "@ofo/typescript-config/tsconfig.library.json",
-  "compilerOptions": {
-    "types": ["node"]
-  },
-  "include": ["src"]
-}

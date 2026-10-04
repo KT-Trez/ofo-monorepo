@@ -10,24 +10,31 @@ if (process.env.E2E === '1') {
     extends: true,
     test: {
       include: ['**/*.live-spec.ts'],
-      name: 'api-core e2e',
-      root: 'apps/api-core',
+      name: 'server e2e',
+      root: 'apps/server',
       testTimeout: 120_000,
     },
   });
 }
 
-// requires a running instance of the infrastructure; see `docker-compose.integration.yml` for details
+// requires real ffmpeg and ffprobe on PATH
 if (process.env.INTEGRATION === '1') {
   projects.push({
     extends: true,
     test: {
-      exclude: ['**/node_modules/**', '**/dist/**'],
-      globalSetup: ['./test/integration.global-setup.ts'],
-      include: ['**/*.int-spec.ts'],
-      name: 'api-core integration',
-      root: 'apps/api-core',
+      include: ['**/*.integration.spec.ts'],
+      name: 'server integration',
+      root: 'apps/server',
       testTimeout: 60_000,
+    },
+  });
+  projects.push({
+    extends: true,
+    test: {
+      include: ['**/*.integration.ts'],
+      name: 'ytdlp integration',
+      root: 'packages/ytdlp',
+      testTimeout: 120_000,
     },
   });
 }
@@ -40,8 +47,16 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'api-core',
-          root: 'apps/api-core/src',
+          include: ['{src,config}/**/*.spec.ts'],
+          name: 'server',
+          root: 'apps/server',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'ytdlp',
+          root: 'packages/ytdlp',
         },
       },
       ...projects,
