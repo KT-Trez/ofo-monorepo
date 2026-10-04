@@ -9,7 +9,7 @@ export class ServerInfoController implements ServerControllerMethods {
 
   @AuthPublic()
   @Get()
-  public getServerInfo(): Promise<GetServerInfoResponse> {
-    return Promise.resolve(this.service.getServerInfo());
+  public async getServerInfo(): Promise<GetServerInfoResponse> {
+    return this.service.getServerInfo();
   }
 }

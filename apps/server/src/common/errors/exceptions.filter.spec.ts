@@ -5,9 +5,7 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import type {
-  HttpArgumentsHost,
-} from '@nestjs/common/interfaces/features/arguments-host.interface.d.ts';
+import type { HttpArgumentsHost } from '@nestjs/common/internal';
 import { noop } from 'es-toolkit';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ApiException } from './api-exception.js';

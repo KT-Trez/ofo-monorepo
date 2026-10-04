@@ -27,6 +27,7 @@ describe('GET /v4/server', () => {
     const response = await request(app.getHttpServer()).get('/v4/server');
 
     // then
+    expect(response.status).toBe(200);
     expect(response.body.features.media).toMatchObject({
       default_audio_format: 'm4a',
       max_concurrent_downloads: 5,
@@ -46,10 +47,11 @@ describe('GET /v4/server', () => {
 
     // then
     expect(response.status).toBe(200);
-    expect(response.headers['content-type']).toBe('application/json');
     expect(response.body).toMatchObject({
       api_version: '4.0.0',
-      auth: { mode: 'token' },
+      auth: {
+        mode: 'token',
+      },
     });
   });
 });

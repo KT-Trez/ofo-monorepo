@@ -1,0 +1,607 @@
+openapi: 3.1.0
+info:
+  title: Music Server API
+  version: 4.0.0
+  description: |
+    Jeden serwer, którego funkcje włącza konfiguracja. Moduły:
+
+    - `media`: wyszukiwanie, pobieranie audio i okładek (self-hosted, domowa sieć LAN),
+    - `sync`: synchronizacja metadanych między urządzeniami (tożsamość zapewnia zewnętrzny dostawca OpenID Connect).
+
+    Klient zawsze zaczyna od `GET /v4/server`, który zwraca włączone moduły i tryb uwierzytelniania.
+    Endpointy wyłączonego modułu odpowiadają `404` z `code = feature_disabled`.
+
+    Uwierzytelnianie (`auth.mode` w konfiguracji):
+    - `none`: bez uwierzytelniania (faza 1),
+    - `token`: statyczny token w nagłówku `Authorization: Bearer` (faza 1.5, tylko moduł `media`),
+    - `oidc`: token dostępu (JWT) wydany przez zewnętrznego dostawcę tożsamości OpenID Connect.
+      Serwer weryfikuje go kluczami publicznymi dostawcy i nie przechowuje haseł ani kont (wymagane przez moduł `sync`).
+
+    Wszystkie błędy mają format `application/problem+json` z polem `code`, które klient mapuje
+    na komunikat (po angielsku). Klient musi tolerować nieznane wartości `code`.
+    Pola JSON używają `snake_case`, daty to RFC 3339 (`timestamptz`).
+servers:
+  - url: http://{host}:{port}
+    variables:
+      host: { default: localhost }
+      port: { default: '8080' }
+tags:
+  - name: server
+    description: Informacje o serwerze (zawsze dostępne)
+  - name: media
+    description: Moduł `media` (x-feature media)
+  - name: sync
+    description: Moduł `sync` (x-feature sync, wymaga `auth.mode = oidc`)
+
+paths:
+  /v4/server:
+    get:
+      tags: [server]
+      operationId: getServerInfo
+      summary: Możliwości serwera
+      description: Publiczny, bez uwierzytelniania. Klient sprawdza tu, które moduły są włączone.
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ServerInfo' }
+
+  /v4/media/search:
+    get:
+      tags: [media]
+      operationId: searchMedia
+      summary: Wyszukiwanie filmów
+      x-feature: media
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string, minLength: 1, maxLength: 200 }
+        - name: source
+          in: query
+          schema: { $ref: '#/components/schemas/Source' }
+          description: Domyślnie pierwszy z `features.media.sources`.
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+        - name: cursor
+          in: query
+          schema: { type: string }
+          description: Wartość `next_cursor` z poprzedniej odpowiedzi.
+      responses:
+        '200':
+          description: Wyniki
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SearchResults' }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+
+  /v4/media/{source}/{source_id}/audio:
+    get:
+      tags: [media]
+      operationId: downloadAudio
+      summary: Pobranie pliku audio
+      description: |
+        Pobieranie na żądanie, bez zadań do śledzenia. Serwer pobiera film, konwertuje do wybranego
+        formatu, wpisuje tagi (tytuł, autor, data, okładka z YouTube) i dopiero wtedy odpowiada `200`.
+        Do tego czasu połączenie jest otwarte (do `prepare_timeout_seconds`), dlatego klient musi
+        ustawić odpowiednio długi timeout odczytu. Błędy przygotowania zwracane są jako
+        `problem+json` jeszcze przed rozpoczęciem strumienia.
+
+        Anulowanie: klient zamyka połączenie, a serwer przerywa pracę, jeśli nikt inny nie czeka
+        na ten plik. Wznawianie transferu nie jest obsługiwane: nieudane pobranie klient powtarza
+        od początku. Weryfikacja po stronie klienta: `Content-Length` i `X-Audio-Duration-Ms`.
+      x-feature: media
+      parameters:
+        - { $ref: '#/components/parameters/SourcePath' }
+        - { $ref: '#/components/parameters/SourceIdPath' }
+        - name: format
+          in: query
+          schema: { $ref: '#/components/schemas/AudioFormat' }
+          description: Domyślnie `features.media.default_audio_format`.
+      responses:
+        '200':
+          description: Cały plik
+          headers:
+            Content-Length: { schema: { type: integer, format: int64 } }
+            X-Audio-Duration-Ms: { schema: { type: integer }, description: Długość utworu w milisekundach }
+          content:
+            audio/ogg:
+              schema: { type: string, format: binary, description: 'Opus w kontenerze Ogg (`format=opus`)' }
+            audio/mp4:
+              schema: { type: string, format: binary, description: 'AAC w kontenerze MP4 (`format=m4a`)' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+        '503':
+          description: Serwer zajęty (kod 2025)
+          headers:
+            Retry-After: { schema: { type: integer } }
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+        '504': { $ref: '#/components/responses/Problem' }
+        '507': { $ref: '#/components/responses/Problem' }
+
+  /v4/media/{source}/{source_id}/cover:
+    get:
+      tags: [media]
+      operationId: getOriginalCover
+      summary: Oryginalna okładka (znormalizowana)
+      description: |
+        Obraz WebP o proporcjach 16:9 (zachowanych z oryginału), skalowany do maks. 1280×720.
+        Serwer wybiera najlepszą dostępną miniaturę i usuwa z niej ewentualne czarne pasy.
+        Klient nigdy nie łączy się z YouTube bezpośrednio.
+      x-feature: media
+      parameters:
+        - { $ref: '#/components/parameters/SourcePath' }
+        - { $ref: '#/components/parameters/SourceIdPath' }
+      responses:
+        '200':
+          description: Obraz
+          headers:
+            Cache-Control: { schema: { type: string } }
+            ETag: { schema: { type: string } }
+          content:
+            image/webp:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+
+  /v4/sync/changes:
+    get:
+      tags: [sync]
+      operationId: pullChanges
+      summary: Pobranie zmian od kursora
+      description: |
+        Zwraca zmiany w kolejności nadania przez serwer. Brak `since` oznacza synchronizację od początku.
+        Klient stosuje całą odpowiedź w jednej transakcji (z odroczoną weryfikacją kluczy obcych),
+        bo kolejność zmian w odpowiedzi nie gwarantuje, że autor poprzedza utwór.
+
+        Usunięcia (tombstones) serwer przechowuje przez `tombstone_retention_days`. Jeśli kursor
+        jest starszy, odpowiedź to `410` z `code = cursor_expired`, a klient robi pełną
+        synchronizację od początku i uzgadnia dane lokalne.
+      x-feature: sync
+      parameters:
+        - name: since
+          in: query
+          schema: { type: string }
+          description: Kursor z poprzedniej odpowiedzi (nieprzezroczysty).
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 1000, default: 500 }
+      responses:
+        '200':
+          description: Zmiany
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PullResponse' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '410': { $ref: '#/components/responses/Problem' }
+    post:
+      tags: [sync]
+      operationId: pushChanges
+      summary: Wysłanie zmian lokalnych
+      description: |
+        Operacja jest idempotentna: ponowne wysłanie tych samych zmian nie zmienia wyniku.
+        Konflikty rozwiązuje zasada „ostatni zapis wygrywa" wg `updated_at` (remis rozstrzyga
+        `device_id`). Serwer obcina `updated_at` z przyszłości do czasu serwera.
+        Wynik każdej zmiany zwracany jest osobno (`results[i]` odpowiada `changes[i]`).
+      x-feature: sync
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PushRequest' }
+      responses:
+        '200':
+          description: Wynik dla każdej zmiany
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PushResponse' }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '413': { $ref: '#/components/responses/Problem' }
+
+  /v4/sync/data:
+    delete:
+      tags: [sync]
+      operationId: deleteSyncData
+      summary: Usunięcie wszystkich danych użytkownika z serwera (RODO)
+      description: Usuwa metadane i okładki powiązane z tożsamością z tokenu. Nie usuwa konta u dostawcy tożsamości.
+      x-feature: sync
+      responses:
+        '204': { description: Dane usunięte }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+
+  /v4/sync/covers/{hash}:
+    parameters:
+      - name: hash
+        in: path
+        required: true
+        schema: { type: string, pattern: '^[0-9a-f]{64}$' }
+        description: SHA-256 zawartości pliku (hex, małe litery); to samo co `cover_hash`.
+    head:
+      tags: [sync]
+      operationId: hasCover
+      summary: Czy okładka jest już na serwerze
+      x-feature: sync
+      responses:
+        '200': { description: Istnieje }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { description: Brak (lub moduł wyłączony) }
+    get:
+      tags: [sync]
+      operationId: getCover
+      summary: Pobranie okładki
+      x-feature: sync
+      responses:
+        '200':
+          description: Plik okładki
+          content:
+            image/jpeg: { schema: { type: string, format: binary } }
+            image/png: { schema: { type: string, format: binary } }
+            image/webp: { schema: { type: string, format: binary } }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+    put:
+      tags: [sync]
+      operationId: putCover
+      summary: Wysłanie okładki
+      description: Serwer weryfikuje, że SHA-256 treści zgadza się z `hash` (inaczej `422 hash_mismatch`). Operacja idempotentna.
+      x-feature: sync
+      requestBody:
+        required: true
+        content:
+          image/jpeg: { schema: { type: string, format: binary } }
+          image/png: { schema: { type: string, format: binary } }
+          image/webp: { schema: { type: string, format: binary } }
+      responses:
+        '201': { description: Zapisano }
+        '204': { description: Już istniała }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '413': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '507': { $ref: '#/components/responses/Problem' }
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Wymagany zależnie od `auth.mode`: pomijany przy `none`; statyczny token przy `token`;
+        token dostępu (JWT) od zewnętrznego dostawcy OIDC przy `oidc`.
+
+  parameters:
+    SourcePath:
+      name: source
+      in: path
+      required: true
+      schema: { $ref: '#/components/schemas/Source' }
+    SourceIdPath:
+      name: source_id
+      in: path
+      required: true
+      schema: { type: string, minLength: 1 }
+      description: Dla YouTube ID filmu.
+
+  responses:
+    Problem:
+      description: Błąd
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }
+
+  schemas:
+    Uid:
+      type: string
+      format: uuid
+      description: UUIDv7 generowany przez klienta.
+    Source:
+      type: string
+      enum: [youtube]
+    AudioFormat:
+      type: string
+      enum: [opus, m4a]
+    CoverKind:
+      type: string
+      enum: [none, custom, original]
+
+    Problem:
+      type: object
+      required: [title, status, code]
+      properties:
+        type: { type: string, default: 'about:blank' }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        code:
+          description: |
+            Kod numeryczny z rejestru kodów serwera (grupy: 1xxx ogólne, 2xxx media, 3xxx sync).
+            Klient musi tolerować nieznane wartości. Zakres 9000-9999 jest zarezerwowany dla kodów
+            lokalnych klienta i nigdy nie jest zwracany przez serwer.
+          anyOf:
+            - type: integer
+              enum:
+                - 1001  # unauthorized (401)
+                - 1002  # forbidden (403)
+                - 1003  # feature_disabled (404)
+                - 1004  # invalid_request (400)
+                - 1005  # rate_limited (429)
+                - 1006  # internal_error (500)
+                - 2001  # unsupported_source (400)
+                - 2002  # unsupported_format (400)
+                - 2010  # video_unavailable (404)
+                - 2011  # video_private (403)
+                - 2012  # age_restricted (403)
+                - 2013  # region_blocked (403)
+                - 2014  # live_stream_unsupported (422)
+                - 2015  # no_audio_stream (422)
+                - 2020  # upstream_unreachable (502)
+                - 2021  # upstream_blocked (502)
+                - 2022  # extractor_outdated (502)
+                - 2023  # conversion_failed (502)
+                - 2024  # prepare_timeout (504)
+                - 2025  # server_busy (503)
+                - 2026  # storage_full (507)
+                - 3001  # cursor_expired (410)
+                - 3002  # batch_too_large (413)
+                - 3003  # payload_too_large (413)
+                - 3004  # hash_mismatch (422)
+                - 3005  # quota_exceeded (507)
+            - type: integer
+
+    ServerInfo:
+      type: object
+      required: [api_version, auth, features]
+      properties:
+        api_version: { type: string, example: 4.0.0 }
+        name: { type: string }
+        auth:
+          type: object
+          required: [mode]
+          properties:
+            mode: { type: string, enum: [none, token, oidc] }
+            issuer: { type: string, format: uri, description: 'Adres dostawcy OIDC (tylko `oidc`); klient używa go do wykrycia konfiguracji.' }
+            audience: { type: string, description: 'Oczekiwany odbiorca tokenu (tylko `oidc`).' }
+        features:
+          type: object
+          required: [media, sync]
+          properties:
+            media:
+              type: object
+              required: [enabled]
+              properties:
+                enabled: { type: boolean }
+                sources:
+                  type: array
+                  items: { $ref: '#/components/schemas/Source' }
+                audio_formats:
+                  type: array
+                  items: { $ref: '#/components/schemas/AudioFormat' }
+                default_audio_format: { $ref: '#/components/schemas/AudioFormat' }
+                max_concurrent_downloads: { type: integer }
+                prepare_timeout_seconds: { type: integer }
+                extractor_version: { type: string }
+            sync:
+              type: object
+              required: [enabled]
+              properties:
+                enabled: { type: boolean }
+                max_push_batch: { type: integer }
+                max_cover_bytes: { type: integer, format: int64 }
+                tombstone_retention_days: { type: integer }
+
+    MediaArtist:
+      type: object
+      required: [source, source_id, name]
+      properties:
+        source: { $ref: '#/components/schemas/Source' }
+        source_id: { type: string, description: ID kanału }
+        name: { type: string }
+    MediaTrack:
+      type: object
+      required: [source, source_id, title, cover_url]
+      properties:
+        source: { $ref: '#/components/schemas/Source' }
+        source_id: { type: string }
+        title: { type: string }
+        artist:
+          description: Autor nieznany, jeśli `null`.
+          oneOf:
+            - $ref: '#/components/schemas/MediaArtist'
+            - type: 'null'
+        released_at: { type: [string, 'null'], format: date-time }
+        duration_ms: { type: [integer, 'null'], minimum: 1 }
+        cover_url:
+          type: string
+          description: Ścieżka względna do `/v4/media/{source}/{source_id}/cover`.
+    SearchResults:
+      type: object
+      required: [items, next_cursor]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/MediaTrack' }
+        next_cursor: { type: [string, 'null'] }
+
+    # --- rekordy synchronizowane (odpowiadają tabelom współdzielonym modelu danych) ---
+    ArtistRecord:
+      type: object
+      required: [uid, name, created_at, updated_at]
+      properties:
+        uid: { $ref: '#/components/schemas/Uid' }
+        source: { oneOf: [{ $ref: '#/components/schemas/Source' }, { type: 'null' }] }
+        source_id: { type: [string, 'null'] }
+        name: { type: string, minLength: 1 }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    TrackRecord:
+      type: object
+      required: [uid, source, source_id, title, cover_kind, created_at, updated_at]
+      properties:
+        uid: { $ref: '#/components/schemas/Uid' }
+        source: { $ref: '#/components/schemas/Source' }
+        source_id: { type: string, minLength: 1 }
+        artist_uid:
+          oneOf: [{ $ref: '#/components/schemas/Uid' }, { type: 'null' }]
+        title: { type: string, minLength: 1 }
+        released_at: { type: [string, 'null'], format: date-time }
+        duration_ms: { type: [integer, 'null'], minimum: 1 }
+        cover_kind: { $ref: '#/components/schemas/CoverKind' }
+        cover_hash:
+          type: [string, 'null']
+          pattern: '^[0-9a-f]{64}$'
+          description: Wymagane (nie null) wtedy i tylko wtedy, gdy `cover_kind` ≠ `none`.
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PlaylistRecord:
+      type: object
+      required: [uid, title, cover_kind, is_sync_enabled, created_at, updated_at]
+      properties:
+        uid: { $ref: '#/components/schemas/Uid' }
+        title: { type: string, minLength: 1 }
+        cover_kind:
+          type: string
+          enum: [none, custom]
+        cover_hash: { type: [string, 'null'], pattern: '^[0-9a-f]{64}$' }
+        is_sync_enabled: { type: boolean }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PlaylistTrackRecord:
+      type: object
+      required: [playlist_uid, track_uid, sort_key, updated_at]
+      properties:
+        playlist_uid: { $ref: '#/components/schemas/Uid' }
+        track_uid: { $ref: '#/components/schemas/Uid' }
+        sort_key: { type: string, minLength: 1 }
+        updated_at: { type: string, format: date-time }
+
+    ArtistUpsert:
+      type: object
+      required: [entity, op, record]
+      properties:
+        entity: { const: artist }
+        op: { const: upsert }
+        record: { $ref: '#/components/schemas/ArtistRecord' }
+    TrackUpsert:
+      type: object
+      required: [entity, op, record]
+      properties:
+        entity: { const: track }
+        op: { const: upsert }
+        record: { $ref: '#/components/schemas/TrackRecord' }
+    PlaylistUpsert:
+      type: object
+      required: [entity, op, record]
+      properties:
+        entity: { const: playlist }
+        op: { const: upsert }
+        record: { $ref: '#/components/schemas/PlaylistRecord' }
+    PlaylistTrackUpsert:
+      type: object
+      required: [entity, op, record]
+      properties:
+        entity: { const: playlist_track }
+        op: { const: upsert }
+        record: { $ref: '#/components/schemas/PlaylistTrackRecord' }
+    Delete:
+      type: object
+      required: [entity, op, key, updated_at]
+      description: |
+        Usunięcie rekordu. `key` to `{uid}` dla `artist`, `track` i `playlist`,
+        a `{playlist_uid, track_uid}` dla `playlist_track`. `updated_at` to moment usunięcia.
+        Serwer kaskadowo usuwa zależne rekordy (utwór: wpisy playlist, playlista: jej wpisy)
+        i rozsyła te usunięcia pozostałym urządzeniom.
+      properties:
+        entity:
+          type: string
+          enum: [artist, track, playlist, playlist_track]
+        op: { const: delete }
+        key:
+          type: object
+          properties:
+            uid: { $ref: '#/components/schemas/Uid' }
+            playlist_uid: { $ref: '#/components/schemas/Uid' }
+            track_uid: { $ref: '#/components/schemas/Uid' }
+        updated_at: { type: string, format: date-time }
+    Change:
+      oneOf:
+        - $ref: '#/components/schemas/ArtistUpsert'
+        - $ref: '#/components/schemas/TrackUpsert'
+        - $ref: '#/components/schemas/PlaylistUpsert'
+        - $ref: '#/components/schemas/PlaylistTrackUpsert'
+        - $ref: '#/components/schemas/Delete'
+
+    PullResponse:
+      type: object
+      required: [changes, next_cursor, has_more]
+      properties:
+        changes:
+          type: array
+          items: { $ref: '#/components/schemas/Change' }
+        next_cursor: { type: string }
+        has_more:
+          type: boolean
+          description: Jeśli `true`, klient od razu prosi o kolejną porcję z `since = next_cursor`.
+    PushRequest:
+      type: object
+      required: [device_id, changes]
+      properties:
+        device_id:
+          $ref: '#/components/schemas/Uid'
+          description: Stały identyfikator instalacji (rozstrzyga remisy `updated_at`).
+        changes:
+          type: array
+          maxItems: 1000
+          items: { $ref: '#/components/schemas/Change' }
+    PushResult:
+      type: object
+      required: [index, status]
+      properties:
+        index: { type: integer, minimum: 0 }
+        status:
+          type: string
+          enum: [applied, superseded, rejected]
+          description: |
+            `applied`: zmiana przyjęta.
+            `superseded`: serwer ma nowszą wersję rekordu (w `current`), klient ją przejmuje.
+            `rejected`: zmiany nie można przyjąć (patrz `reason`).
+        reason:
+          type: string
+          enum: [unique_violation, missing_reference, referenced_by_tracks, invalid]
+          description: |
+            `unique_violation`: utwór lub autor z tym `(source, source_id)` już istnieje pod innym `uid`
+            (w `current`); klient scala rekordy, przepinając swoje odwołania na istniejący `uid`.
+            `missing_reference`: brak rekordu, do którego odwołuje się zmiana; klient wysyła go najpierw.
+            `referenced_by_tracks`: nie można usunąć autora, który ma utwory.
+        current:
+          description: Wersja rekordu aktualnie na serwerze (dla `superseded` i `unique_violation`).
+          $ref: '#/components/schemas/Change'
+    PushResponse:
+      type: object
+      required: [results, cursor]
+      properties:
+        results:
+          type: array
+          items: { $ref: '#/components/schemas/PushResult' }
+        cursor:
+          type: string
+          description: Kursor po zastosowaniu zmian (można go użyć jako `since`).

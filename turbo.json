@@ -15,6 +15,7 @@
     "//#quality:fix": {
       "dependsOn": ["//#lint:fix", "//#format:fix"]
     },
+    "//#test": {},
     "//#test:coverage": {
       "outputs": ["coverage/**"]
     },

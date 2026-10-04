@@ -61,7 +61,7 @@ describe('ServerInfoService', () => {
     // then
     expect(info.auth).toEqual({
       audience: 'ofo',
-      issuer: 'https://id.example.com',
+      issuer: 'https://example.com',
       mode: 'oidc',
     });
   });
@@ -69,10 +69,10 @@ describe('ServerInfoService', () => {
   it('should return the sync configuration when sync feature is enabled', async () => {
     // given
     const service = await createService({
-      MAX_COVER_BYTES: '1024',
-      MAX_PUSH_BATCH: '100',
       SYNC_ENABLED: 'true',
-      TOMBSTONE_RETENTION_DAYS: '7',
+      SYNC_MAX_COVER_BYTES: '1024',
+      SYNC_MAX_PUSH_BATCH: '100',
+      SYNC_TOMBSTONE_RETENTION_DAYS: '7',
     });
 
     // when

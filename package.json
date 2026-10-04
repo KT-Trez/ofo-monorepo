@@ -11,6 +11,7 @@
     "type": "git",
     "url": "github:KT-Trez/ofo-monorepo"
   },
+  "type": "module",
   "scripts": {
     "build": "turbo run build",
     "codegen": "pnpm --filter @ofo/server-client --filter @ofo/server-contract run generate",
@@ -29,9 +30,10 @@
   "devDependencies": {
     "@swc/core": "catalog:",
     "@types/node": "catalog:",
-    "oxfmt": "^0.59.0",
-    "oxlint": "^1.74.0",
-    "turbo": "^2.10.5",
+    "@vitest/coverage-v8": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "turbo": "catalog:",
     "unplugin-swc": "catalog:",
     "vitest": "catalog:"
   },

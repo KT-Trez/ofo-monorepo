@@ -23,6 +23,14 @@
     "packages/server-client/src/schema.ts"
   ],
   "plugins": ["import", "jsdoc", "oxc", "promise", "typescript", "unicorn", "vitest"],
+  "overrides": [
+    {
+      "files": ["**/*.spec.ts"],
+      "rules": {
+        "unicorn/consistent-function-scoping": "off"
+      }
+    }
+  ],
   "rules": {
     "sort-keys": "error",
     "vitest/require-mock-type-parameters": "off"

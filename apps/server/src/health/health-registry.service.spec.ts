@@ -1,4 +1,3 @@
-import type { HealthIndicatorFunction } from '@nestjs/terminus';
 import { Test } from '@nestjs/testing';
 import { describe, expect, it, vi } from 'vitest';
 import { HealthRegistryService } from './health-registry.service.js';
@@ -14,7 +13,7 @@ describe('HealthRegistryService', async () => {
 
   it('should add a check to registry', async () => {
     // given
-    const check = vi.fn<HealthIndicatorFunction>();
+    const check = vi.fn();
 
     const registry = await createRegistry();
 
@@ -27,8 +26,8 @@ describe('HealthRegistryService', async () => {
 
   it('should replace a check registered under the same key', async () => {
     // given
-    const checkA = vi.fn<HealthIndicatorFunction>();
-    const checkB = vi.fn<HealthIndicatorFunction>();
+    const checkA = vi.fn();
+    const checkB = vi.fn();
 
     const registry = await createRegistry();
 
