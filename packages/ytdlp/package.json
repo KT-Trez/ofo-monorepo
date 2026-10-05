@@ -2,8 +2,8 @@
   "name": "@ofo/ytdlp",
   "version": "1.0.0",
   "type": "module",
+  "sideEffects": false,
   "exports": {
-    ".": "./src/index.ts",
     "./*": "./src/*.ts"
   },
   "scripts": {

@@ -1,0 +1,11 @@
+{
+  "id": "xxxxxxxxxxx",
+  "title": "Silent clip",
+  "channel_id": null,
+  "uploader": "Some Uploader",
+  "upload_date": "20240229",
+  "duration": 5.5,
+  "live_status": "was_live",
+  "availability": "unlisted",
+  "formats": [{ "format_id": "136", "acodec": "none", "vcodec": "avc1.4d4016" }]
+}

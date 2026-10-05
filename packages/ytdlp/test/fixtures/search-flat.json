@@ -1,0 +1,52 @@
+{
+  "id": "lofi hip hop",
+  "title": "lofi hip hop",
+  "_type": "playlist",
+  "extractor": "youtube:search",
+  "entries": [
+    {
+      "_type": "url",
+      "ie_key": "Youtube",
+      "id": "jfKfPfyJRdk",
+      "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+      "title": "lofi hip hop radio - beats to relax/study to",
+      "duration": null,
+      "channel_id": "UCSJ4gkVC6NrvII8umztf0Ow",
+      "channel": "Lofi Girl",
+      "uploader": "Lofi Girl",
+      "thumbnails": [
+        { "url": "https://i.ytimg.com/vi/jfKfPfyJRdk/hqdefault.jpg", "height": 188, "width": 336 },
+        { "url": "https://i.ytimg.com/vi/jfKfPfyJRdk/hq720.jpg", "height": 404, "width": 720 }
+      ],
+      "view_count": 1520000,
+      "live_status": "is_live",
+      "availability": null
+    },
+    {
+      "_type": "url",
+      "ie_key": "Youtube",
+      "id": "5qap5aO4i9A",
+      "url": "https://www.youtube.com/watch?v=5qap5aO4i9A",
+      "title": "Chill Beats Vol. 2",
+      "duration": 3725,
+      "channel_id": "UCabcdefghijklmnopqrstuv",
+      "channel": null,
+      "uploader": "Chill Records",
+      "thumbnails": [{ "url": "https://i.ytimg.com/vi/5qap5aO4i9A/hqdefault.jpg" }],
+      "live_status": "not_live"
+    },
+    null,
+    { "_type": "url", "id": "no-title-entry" },
+    {
+      "_type": "url",
+      "id": "dQw4w9WgXcQ",
+      "title": "Rick Astley - Never Gonna Give You Up",
+      "duration": 212.4,
+      "channel_id": "UCuAXFkgsw1L7xaCfnd5JJOw",
+      "channel": "Rick Astley",
+      "thumbnails": [],
+      "live_status": "unexpected_value",
+      "availability": "public"
+    }
+  ]
+}

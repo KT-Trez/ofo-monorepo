@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="YT (e2e)" type="JavaScriptTestRunnerVitest">
+    <node-interpreter value="project" />
+    <vitest-package value="$PROJECT_DIR$/packages/ytdlp/node_modules/vitest" />
+    <working-dir value="$PROJECT_DIR$/packages/ytdlp" />
+    <vitest-options value="--run --testTimeout=5000" />
+    <envs>
+      <env name="E2E" value="1" />
+      <env name="YTDLP_BINARY" value="$PROJECT_DIR$/tmp/yt-dlp/yt-dlp_linux" />
+      <env name="FFMPEG_PATH" value="$PROJECT_DIR$/tmp/ffmpeg/bin" />
+      <env name="FFPROBE_PATH" value="$PROJECT_DIR$/tmp/ffmpeg/bin/ffprobe" />
+    </envs>
+    <scope-kind value="SUITE" />
+    <test-file value="$PROJECT_DIR$/packages/ytdlp/src/YT.e2e.spec.ts" />
+    <test-names>
+      <test-name value="YT" />
+    </test-names>
+    <method v="2" />
+  </configuration>
+</component>

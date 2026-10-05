@@ -15,9 +15,18 @@ if (process.env.E2E === '1') {
       testTimeout: 120_000,
     },
   });
+  // requires real ffmpeg and ffprobe on PATH
+  projects.push({
+    extends: true,
+    test: {
+      include: ['**/*.e2e.ts'],
+      name: 'ytdlp e2e',
+      root: 'packages/ytdlp',
+      testTimeout: 60_000,
+    },
+  });
 }
 
-// requires real ffmpeg and ffprobe on PATH
 if (process.env.INTEGRATION === '1') {
   projects.push({
     extends: true,
@@ -26,15 +35,6 @@ if (process.env.INTEGRATION === '1') {
       name: 'server integration',
       root: 'apps/server',
       testTimeout: 60_000,
-    },
-  });
-  projects.push({
-    extends: true,
-    test: {
-      include: ['**/*.integration.ts'],
-      name: 'ytdlp integration',
-      root: 'packages/ytdlp',
-      testTimeout: 120_000,
     },
   });
 }
