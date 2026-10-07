@@ -11,7 +11,7 @@
       <env name="FFPROBE_PATH" value="$PROJECT_DIR$/tmp/ffmpeg/bin/ffprobe" />
     </envs>
     <scope-kind value="SUITE" />
-    <test-file value="$PROJECT_DIR$/packages/ytdlp/src/YT.e2e.spec.ts" />
+    <test-file value="$PROJECT_DIR$/packages/ytdlp/test/e2e/YT.e2e.spec.ts" />
     <test-names>
       <test-name value="YT" />
     </test-names>

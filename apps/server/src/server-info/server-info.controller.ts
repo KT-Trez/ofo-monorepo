@@ -1,15 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import type { GetServerInfoResponse, ServerControllerMethods } from '@ofo/server-contract';
+import type { ControllerMethods, ServerInfo } from '@ofo/server-contract';
 import { AuthPublic } from '../auth/auth-public.decorator.ts';
 import { ServerInfoService } from './server-info.service.js';
 
 @Controller({ path: 'server', version: '4' })
-export class ServerInfoController implements ServerControllerMethods {
+export class ServerInfoController implements ControllerMethods<'getServerInfo'> {
   constructor(private readonly service: ServerInfoService) {}
 
   @AuthPublic()
   @Get()
-  public async getServerInfo(): Promise<GetServerInfoResponse> {
+  public async getServerInfo(): Promise<ServerInfo> {
     return this.service.getServerInfo();
   }
 }

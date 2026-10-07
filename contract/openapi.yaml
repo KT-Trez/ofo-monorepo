@@ -133,7 +133,7 @@ paths:
   /v4/media/{source}/{source_id}/cover:
     get:
       tags: [media]
-      operationId: getOriginalCover
+      operationId: downloadCover
       summary: Oryginalna okładka (znormalizowana)
       description: |
         Obraz WebP o proporcjach 16:9 (zachowanych z oryginału), skalowany do maks. 1280×720.
@@ -152,6 +152,11 @@ paths:
           content:
             image/webp:
               schema: { type: string, format: binary }
+        '304':
+          description: Okładka bez zmian względem `If-None-Match` - klient używa swojej kopii
+          headers:
+            Cache-Control: { schema: { type: string } }
+            ETag: { schema: { type: string } }
         '401': { $ref: '#/components/responses/Problem' }
         '404': { $ref: '#/components/responses/Problem' }
         '502': { $ref: '#/components/responses/Problem' }

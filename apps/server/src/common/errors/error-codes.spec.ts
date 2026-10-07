@@ -10,7 +10,7 @@ describe('ERROR_CODES', () => {
     expect(new Set(codes).size).toBe(codes.length);
     expect(codes).toEqual([
       1001, 1002, 1003, 1004, 1005, 1006, 2001, 2002, 2010, 2011, 2012, 2013, 2014, 2015, 2020,
-      2021, 2022, 2023, 2024, 2025, 2026, 3001, 3002, 3003, 3004, 3005,
+      2021, 2022, 2023, 2024, 2025, 3001, 3002, 3003, 3004, 3005,
     ]);
   });
 
@@ -22,7 +22,6 @@ describe('ERROR_CODES', () => {
     ['conversion_failed', 502],
     ['prepare_timeout', 504],
     ['server_busy', 503],
-    ['storage_full', 507],
     ['cursor_expired', 410],
     ['hash_mismatch', 422],
   ] as const)('should map "%s" to HTTP "%i" code', (name, status) => {

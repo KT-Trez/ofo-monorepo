@@ -1,6 +1,6 @@
 {
   "extends": "@ofo/typescript-config/tsconfig.library.json",
-  "include": ["src"],
+  "include": ["src", "test"],
   "compilerOptions": {
     "types": ["node"]
   }

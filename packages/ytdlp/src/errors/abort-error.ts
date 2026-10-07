@@ -8,6 +8,6 @@ export function createAbortError(signal?: AbortSignal): Error {
   return new DOMException('The operation was aborted', 'AbortError');
 }
 
-export function isAbortError(error: unknown): boolean {
+export function isAbortError(error: unknown): error is Error {
   return error instanceof Error && error.name === 'AbortError';
 }

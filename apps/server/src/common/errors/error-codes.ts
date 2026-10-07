@@ -109,11 +109,6 @@ export const ErrorCodes = {
     status: HttpStatus.SERVICE_UNAVAILABLE,
     title: 'Server is busy',
   },
-  storage_full: {
-    code: 2026,
-    status: HttpStatus.INSUFFICIENT_STORAGE,
-    title: 'Storage is full',
-  },
   // 3xxx: sync (phase 2)
   cursor_expired: {
     code: 3001,

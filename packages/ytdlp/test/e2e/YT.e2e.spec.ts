@@ -2,7 +2,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { YT } from './YT.ts';
+import { YT } from '../../src/YT.ts';
 
 /**
  * Runs against the real `yt-dlp` with `E2E=1`.

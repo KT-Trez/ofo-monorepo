@@ -19,7 +19,7 @@ if (process.env.E2E === '1') {
   projects.push({
     extends: true,
     test: {
-      include: ['**/*.e2e.ts'],
+      include: ['test/**/*.spec.ts'],
       name: 'ytdlp e2e',
       root: 'packages/ytdlp',
       testTimeout: 60_000,
@@ -55,6 +55,7 @@ export default defineConfig({
       {
         extends: true,
         test: {
+          include: ['src/**/*.spec.ts'],
           name: 'ytdlp',
           root: 'packages/ytdlp',
         },

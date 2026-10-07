@@ -16,7 +16,6 @@ describe('GET /v4/server', () => {
     // given
     app = await createTestApp(
       {
-        MEDIA_DEFAULT_AUDIO_FORMAT: 'm4a',
         MEDIA_MAX_CONCURRENT_DOWNLOADS: '5',
         MEDIA_PREPARE_TIMEOUT_SECONDS: '120',
       },
@@ -29,7 +28,6 @@ describe('GET /v4/server', () => {
     // then
     expect(response.status).toBe(200);
     expect(response.body.features.media).toMatchObject({
-      default_audio_format: 'm4a',
       max_concurrent_downloads: 5,
       prepare_timeout_seconds: 120,
     });

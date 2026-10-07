@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { AudioFormat, ServerInfo } from '@ofo/server-contract';
+import type { ServerInfo } from '@ofo/server-contract';
 import type { ServerConfig } from '../../config/configuration.js';
+import { AUDIO_FORMATS } from '../../config/media-options.js';
 
 @Injectable()
 export class ServerInfoService {
   public static readonly API_VERSION = '4.0.0';
-  public static readonly AUDIO_FORMATS: AudioFormat[] = ['opus', 'm4a'];
 
   constructor(private readonly config: ConfigService<ServerConfig>) {}
 
@@ -23,7 +23,7 @@ export class ServerInfoService {
       features: {
         media: media.enabled
           ? {
-              audio_formats: ServerInfoService.AUDIO_FORMATS,
+              audio_formats: [...AUDIO_FORMATS],
               default_audio_format: media.default_audio_format,
               enabled: true,
               max_concurrent_downloads: media.max_concurrent_downloads,
