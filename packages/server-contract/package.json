@@ -1,0 +1,19 @@
+{
+  "name": "@ofo/server-contract",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "openapi-typescript ../../contract/openapi.yaml --output src/schema.gen.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@ofo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "openapi-typescript": "catalog:",
+    "typescript": "catalog:codegen"
+  }
+}
