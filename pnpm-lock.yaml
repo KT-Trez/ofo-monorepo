@@ -401,7 +401,7 @@ importers:
         specifier: 'catalog:'
         version: 7.0.2
 
-  packages/server-client:
+  packages/api-client:
     dependencies:
       openapi-fetch:
         specifier: 'catalog:'

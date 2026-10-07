@@ -14,7 +14,7 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
-    "codegen": "pnpm --filter @ofo/server-client --filter @ofo/server-contract run generate",
+    "codegen": "pnpm --filter @ofo/api-client --filter @ofo/server-contract run generate",
     "dev": "turbo run dev",
     "format": "oxfmt --check",
     "format:fix": "oxfmt --write",
