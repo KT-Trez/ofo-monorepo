@@ -87,6 +87,6 @@ export class MediaController implements ControllerMethods<
 
   @Get('search')
   public searchMedia(@Query() query: SearchMediaQuery): Promise<SearchResults> {
-    return this.search.search({ cursor: query.cursor, limit: query.limit, query: query.q });
+    return this.search.search({ limit: query.limit, query: query.q, rawCursor: query.cursor });
   }
 }
