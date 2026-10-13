@@ -49,16 +49,13 @@ describe('SearchCursor', () => {
     [140, 50, true],
     [150, 50, false],
     [190, 50, false],
-  ])(
-    'should report whether a page follows offset %i with limit %i',
-    ([offset, limit, hasNext]) => {
-      // given / when
-      const cursor = new SearchCursor(limit, offset);
+  ])('should report whether a page follows offset %i with limit %i', ([offset, limit, hasNext]) => {
+    // given / when
+    const cursor = new SearchCursor(limit, offset);
 
-      // then
-      expect(cursor.hasNext).toBe(hasNext);
-    },
-  );
+    // then
+    expect(cursor.hasNext).toBe(hasNext);
+  });
 
   it('should accept a cursor with a zero offset', () => {
     // given / when

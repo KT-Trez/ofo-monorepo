@@ -1,7 +1,7 @@
+import { describe, expect, it } from 'vitest';
 import type { YTErrorKinds } from '@ofo/ytdlp/errors/types';
 import { YTError } from '@ofo/ytdlp/errors/YT-error';
 import { YTTimeoutError } from '@ofo/ytdlp/errors/YT-timeout-error';
-import { describe, expect, it } from 'vitest';
 import { ApiException } from '../common/errors/api-exception.js';
 import { mapWdlError } from './wdl-error.mapper.ts';
 

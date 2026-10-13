@@ -1,6 +1,6 @@
 import type { OperationPath, Source } from '@ofo/server-contract';
 import { IsIn, Matches } from 'class-validator';
-import { MEDIA_SOURCES } from '../../../config/media-options.js';
+import { MEDIA_SOURCES } from '../../../config/constants.ts';
 import { SOURCE_VALIDATION_OPTIONS } from './common.ts';
 
 type CoverPath = OperationPath<'downloadCover'>;

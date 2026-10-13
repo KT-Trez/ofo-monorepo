@@ -1,6 +1,6 @@
 import type { AudioFormat, OperationQuery } from '@ofo/server-contract';
 import { IsIn, IsOptional } from 'class-validator';
-import { AUDIO_FORMATS, DEFAULT_AUDIO_FORMAT } from '../../../config/media-options.ts';
+import { AUDIO_FORMATS, DEFAULT_AUDIO_FORMAT } from '../../../config/constants.ts';
 import { errorHint } from '../../common/validation/error-hint.ts';
 
 type DownloadQuery = OperationQuery<'downloadAudio'>;

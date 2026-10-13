@@ -1,5 +1,5 @@
-import type { ServerInfo } from '@ofo/server-contract';
 import { describe, expect, it } from 'vitest';
+import type { ServerInfo } from '@ofo/server-contract';
 import { createTestModule } from '../../test/core/create-test-module.ts';
 import { ServerInfoService } from './server-info.service.js';
 
@@ -46,7 +46,9 @@ describe('ServerInfoService', () => {
     expect(info.features.media).toEqual({ enabled: false });
   });
 
-  it('should return the OIDC auth configuration when "auth.mode" is "oidc"', async () => {
+  // phase 2: the configuration is refused on startup until OIDC and sync are implemented
+  // oxlint-disable-next-line vitest/no-disabled-tests
+  it.skip('should return the OIDC auth configuration when "auth.mode" is "oidc"', async () => {
     // given
     const service = await createService({
       AUTH_MODE: 'oidc',
@@ -66,7 +68,9 @@ describe('ServerInfoService', () => {
     });
   });
 
-  it('should return the sync configuration when sync feature is enabled', async () => {
+  // phase 2: the configuration is refused on startup until OIDC and sync are implemented
+  // oxlint-disable-next-line vitest/no-disabled-tests
+  it.skip('should return the sync configuration when sync feature is enabled', async () => {
     // given
     const service = await createService({
       SYNC_ENABLED: 'true',

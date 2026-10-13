@@ -1,7 +1,7 @@
 import { HealthIndicatorService } from '@nestjs/terminus';
 import { Test } from '@nestjs/testing';
-import { YT } from '@ofo/ytdlp/YT';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { YT } from '@ofo/ytdlp/YT';
 import { WdlReadiness } from './wdl-readiness.service.ts';
 
 describe('WdlReadiness', () => {

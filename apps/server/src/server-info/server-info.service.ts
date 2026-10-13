@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { ServerInfo } from '@ofo/server-contract';
-import type { ServerConfig } from '../../config/configuration.js';
-import { AUDIO_FORMATS } from '../../config/media-options.js';
+import type { ServerConfig } from '../../config/configuration.schema.js';
+import { AUDIO_FORMATS } from '../../config/constants.ts';
 
 @Injectable()
 export class ServerInfoService {

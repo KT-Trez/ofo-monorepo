@@ -45,7 +45,8 @@ describe('FeatureGatesModule', () => {
     app = await createTestApp(
       {
         MEDIA_ENABLED: String(disabledModule !== 'media'),
-        SYNC_ENABLED: String(disabledModule !== 'sync'),
+        // sync is never enabled in phase 1
+        // SYNC_ENABLED: String(disabledModule !== 'sync'),
       },
       { imports: [FeatureGatesModule] },
     );

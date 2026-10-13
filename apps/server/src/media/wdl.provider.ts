@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { YT } from '@ofo/ytdlp/YT';
-import type { ServerConfig } from '../../config/configuration.js';
+import type { ServerConfig } from '../../config/configuration.schema.js';
 
 const SECOND_MS = 1000;
 const UPDATE_TIMEOUT_MS = 300 * SECOND_MS;

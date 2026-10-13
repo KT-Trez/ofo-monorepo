@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { YT } from '@ofo/ytdlp/YT';
 import sharp from 'sharp';
+import { YT } from '@ofo/ytdlp/YT';
 import { ApiException } from '../../common/errors/api-exception.js';
 import { type Box, toAspect } from './aspect-crop.util.js';
 import {

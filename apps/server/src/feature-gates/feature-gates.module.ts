@@ -1,6 +1,6 @@
 import { type MiddlewareConsumer, Module, type NestModule } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { ServerConfig } from '../../config/configuration.js';
+import type { ServerConfig } from '../../config/configuration.schema.js';
 import { featureDisabledMiddleware } from './feature-disabled.middleware.js';
 
 @Module({})

@@ -1,3 +1,4 @@
+import { STATUS_CODES } from 'node:http';
 import {
   type ArgumentsHost,
   Catch,
@@ -5,9 +6,8 @@ import {
   HttpException,
   Logger,
 } from '@nestjs/common';
-import type { Problem } from '@ofo/server-contract';
 import type { Response } from 'express';
-import { STATUS_CODES } from 'node:http';
+import type { Problem } from '@ofo/server-contract';
 import { ApiException } from './api-exception.js';
 import { ErrorCodes, type ErrorName } from './error-codes.js';
 

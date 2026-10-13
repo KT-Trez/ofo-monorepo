@@ -44,26 +44,6 @@ describe('AuthGuard', () => {
     });
   });
 
-  describe('"oidc" mode', () => {
-    const env: Record<string, string> = {
-      AUTH_MODE: 'oidc',
-    };
-
-    it('should fail closed for the not implemented mode', async () => {
-      // given
-      app = await createTestApp(env, { controllers: [FakeController], imports: [AuthModule] });
-
-      // when
-      const response = await request(app.getHttpServer())
-        .get('/v4/probe/private')
-        .set('Authorization', 'Bearer anything');
-
-      // then
-      expect(response.status).toBe(401);
-      expect(response.body).toMatchObject({ code: 1001, status: 401 });
-    });
-  });
-
   describe('"token" mode', () => {
     const env: Record<string, string> = {
       AUTH_MODE: 'token',

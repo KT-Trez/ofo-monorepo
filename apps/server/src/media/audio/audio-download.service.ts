@@ -1,11 +1,11 @@
-import { Injectable, Logger, type OnModuleInit } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import type { AudioFormat } from '@ofo/server-contract';
-import { YT } from '@ofo/ytdlp/YT';
-import { Semaphore } from 'es-toolkit/promise';
 import { mkdir, mkdtemp, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { ServerConfig } from '../../../config/configuration.js';
+import { Injectable, Logger, type OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { Semaphore } from 'es-toolkit/promise';
+import type { AudioFormat } from '@ofo/server-contract';
+import { YT } from '@ofo/ytdlp/YT';
+import type { ServerConfig } from '../../../config/configuration.schema.js';
 import { type FlightSubscription, SingleFlight } from '../../common/concurrency/single-flight.js';
 import { ApiException } from '../../common/errors/api-exception.js';
 import { mapWdlError } from '../wdl-error.mapper.ts';

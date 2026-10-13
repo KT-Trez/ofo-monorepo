@@ -4,6 +4,11 @@ import { describe, expect, it } from 'vitest';
 import { errorHint } from './error-hint.ts';
 import { validationExceptionFactory } from './validation-exception.factory.js';
 
+class MockNestedDto {
+  @IsIn(['m4a'], errorHint('unsupported_format'))
+  format!: string;
+}
+
 class MockDto {
   @Matches(/^\w{3}$/)
   id!: string;
@@ -17,11 +22,6 @@ class MockDto {
 
   @IsIn(['youtube'], errorHint('unsupported_source'))
   source!: string;
-}
-
-class MockNestedDto {
-  @IsIn(['m4a'], errorHint('unsupported_format'))
-  format!: string;
 }
 
 describe('validationExceptionFactory', () => {

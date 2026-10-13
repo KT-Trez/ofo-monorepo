@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
 import {
   Controller,
   Get,
@@ -8,10 +10,8 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import type { ControllerMethods, SearchResults } from '@ofo/server-contract';
 import type { Request, Response } from 'express';
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
+import type { ControllerMethods, SearchResults } from '@ofo/server-contract';
 import { AudioDownloadService } from './audio/audio-download.service.js';
 import { AUDIO_MIME_TYPES } from './audio/constants.ts';
 import { CoverService } from './cover/cover.service.js';

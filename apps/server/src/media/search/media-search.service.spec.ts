@@ -1,7 +1,7 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { YTError } from '@ofo/ytdlp/errors/YT-error';
 import type { SearchItem } from '@ofo/ytdlp/mapper/types';
 import { YT } from '@ofo/ytdlp/YT';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createTestModule } from '../../../test/core/create-test-module.ts';
 import { MediaSearchService } from './media-search.service.js';
 import { SearchCursor } from './search-cursor.js';

@@ -1,9 +1,9 @@
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { type CanActivate, type ExecutionContext, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import type { Request } from 'express';
-import { createHash, timingSafeEqual } from 'node:crypto';
-import type { ServerConfig } from '../../config/configuration.js';
+import type { ServerConfig } from '../../config/configuration.schema.js';
 import { ApiException } from '../common/errors/api-exception.js';
 import { IS_PUBLIC_PATH_FLAG } from './auth.constants.ts';
 

@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
-import type { ServerConfig } from '../config/configuration.js';
+import type { ServerConfig } from '../config/configuration.schema.js';
 import { AppModule } from './app.module.js';
 import { configureApp } from './configure-app.js';
 

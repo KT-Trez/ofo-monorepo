@@ -10,7 +10,7 @@ import {
   MaxLength,
   Min,
 } from 'class-validator';
-import { MEDIA_SOURCES } from '../../../config/media-options.ts';
+import { MEDIA_SOURCES } from '../../../config/constants.ts';
 import { SOURCE_VALIDATION_OPTIONS } from './common.ts';
 
 type SearchQuery = OperationQuery<'searchMedia'>;

@@ -25,7 +25,8 @@
     "reflect-metadata": "catalog:",
     "rxjs": "catalog:",
     "sharp": "catalog:",
-    "type-fest": "catalog:"
+    "type-fest": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@nestjs/cli": "catalog:",
