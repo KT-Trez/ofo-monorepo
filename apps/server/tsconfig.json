@@ -1,0 +1,8 @@
+{
+  "extends": "@ofo/typescript-config/tsconfig.nest.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    // @ofo/server-contract is consumed as TypeScript source (types only) and imports "*.ts" files
+    "rewriteRelativeImportExtensions": true
+  }
+}

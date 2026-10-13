@@ -13,7 +13,7 @@ import type { Request, Response } from 'express';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { AudioDownloadService } from './audio/audio-download.service.js';
-import { AUDIO_MIME_TYPES } from './audio/audio-formats.js';
+import { AUDIO_MIME_TYPES } from './audio/constants.ts';
 import { CoverService } from './cover/cover.service.js';
 import { DownloadAudioQuery } from './dto/download-audio-query.dto.ts';
 import { MediaPathParams } from './dto/media-path-params.dto.ts';
@@ -69,7 +69,7 @@ export class MediaController implements ControllerMethods<
     res.once('close', () => controller.abort());
 
     const { data, contentType } = await this.covers
-      .downloadCover(path.source, path.source_id, controller.signal)
+      .downloadCover(path.source_id, controller.signal)
       .catch((error: unknown) => {
         throw mapWdlError(error, 'search');
       });
