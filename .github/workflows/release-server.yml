@@ -1,0 +1,71 @@
+name: Release server image
+
+# A merged PR is a push to master; the paths cover @ofo/server and the workspace packages it is built from.
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'apps/server/**'
+      - 'packages/ytdlp/**'
+      - '.dockerignore'
+      - '.github/workflows/release-server.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+  workflow_dispatch:
+
+concurrency:
+  cancel-in-progress: false
+  group: release-server
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: ghcr.io/kt-trez/ofo-server
+
+jobs:
+  publish:
+    # a manual run from another branch must not overwrite "latest"
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: docker/setup-qemu-action@v4
+
+      - uses: docker/setup-buildx-action@v4
+
+      - uses: docker/login-action@v4
+        with:
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+
+      - id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE }}
+          labels: |
+            org.opencontainers.image.title=ofo-server
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+
+      - uses: docker/build-push-action@v7
+        with:
+          cache-from: type=gha,scope=ofo-server
+          cache-to: type=gha,scope=ofo-server,mode=max
+          context: .
+          file: apps/server/Dockerfile
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          target: release
