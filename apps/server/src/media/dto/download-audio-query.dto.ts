@@ -1,5 +1,5 @@
-import type { AudioFormat, OperationQuery } from '@ofo/server-contract';
 import { IsIn, IsOptional } from 'class-validator';
+import type { AudioFormat, OperationQuery } from '@ofo/server-contract';
 import { AUDIO_FORMATS, DEFAULT_AUDIO_FORMAT } from '../../../config/constants.ts';
 import { errorHint } from '../../common/validation/error-hint.ts';
 

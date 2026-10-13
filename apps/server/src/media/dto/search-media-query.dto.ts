@@ -1,4 +1,3 @@
-import type { OperationQuery, Source } from '@ofo/server-contract';
 import { Transform, Type } from 'class-transformer';
 import {
   IsIn,
@@ -10,6 +9,7 @@ import {
   MaxLength,
   Min,
 } from 'class-validator';
+import type { OperationQuery, Source } from '@ofo/server-contract';
 import { MEDIA_SOURCES } from '../../../config/constants.ts';
 import { SOURCE_VALIDATION_OPTIONS } from './common.ts';
 

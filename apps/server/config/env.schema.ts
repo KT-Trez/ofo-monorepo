@@ -65,5 +65,5 @@ export const isMediaEnabled = (env: Record<string, string | undefined>) => {
 };
 
 export const isSyncEnabled = (env: Record<string, string | undefined>) => {
-  return EnvShape.SYNC_ENABLED.parse(env.MEDIA_ENABLED || undefined);
+  return EnvShape.SYNC_ENABLED.parse(env.SYNC_ENABLED || undefined);
 };

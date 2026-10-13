@@ -1,4 +1,3 @@
-import type { Source } from '@ofo/server-contract';
 import { z } from 'zod';
 import { DEFAULT_AUDIO_FORMAT, MEDIA_SOURCES } from './constants.ts';
 import { EnvSchema } from './env.schema.ts';
@@ -27,7 +26,7 @@ export const ConfigurationSchema = EnvSchema.transform(env => ({
       enabled: env.MEDIA_ENABLED,
       max_concurrent_downloads: env.MEDIA_MAX_CONCURRENT_DOWNLOADS,
       prepare_timeout_seconds: env.MEDIA_PREPARE_TIMEOUT_SECONDS,
-      sources: [...MEDIA_SOURCES] as Source[],
+      sources: [...MEDIA_SOURCES],
     },
     sync: {
       enabled: env.SYNC_ENABLED,
