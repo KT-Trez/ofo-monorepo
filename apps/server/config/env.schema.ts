@@ -24,7 +24,7 @@ const EnvShape = {
   MEDIA_ENABLED: z.stringbool().default(true),
   MEDIA_MAX_CONCURRENT_DOWNLOADS: PositiveIntSchema.default(3),
   MEDIA_PREPARE_TIMEOUT_SECONDS: PositiveIntSchema.default(300),
-  PORT: z.coerce.number().int().min(0).default(5000),
+  PORT: z.coerce.number().int().min(0).default(8080),
   SYNC_ENABLED: z.stringbool().default(false),
   SYNC_MAX_COVER_BYTES: PositiveIntSchema.default(5_242_880),
   SYNC_MAX_PUSH_BATCH: PositiveIntSchema.default(500),

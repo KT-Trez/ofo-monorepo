@@ -90,7 +90,7 @@ RUN apt-get update \
 COPY --from=ytdlp-bin /yt-dlp /usr/local/bin/yt-dlp
 
 ENV NODE_ENV=production \
-    PORT=5000 \
+    PORT=8080 \
     AUDIO_TMP_DIR=/var/cache/ofo/audio-tmp \
     YTDLP_PATH=/usr/local/bin/yt-dlp \
     YTDLP_JS_RUNTIME=node \
@@ -113,5 +113,5 @@ COPY --from=build --chown=node:node /app/apps/server/dist ./dist
 COPY --from=build --chown=node:node /app/packages/ytdlp/package.json /app/packages/ytdlp/package.json
 COPY --from=build --chown=node:node /app/packages/ytdlp/src /app/packages/ytdlp/src
 
-EXPOSE 5000
+EXPOSE 8080
 CMD ["node", "dist/src/main.js"]

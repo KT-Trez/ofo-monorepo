@@ -11,7 +11,7 @@ describe('ConfigurationSchema', () => {
 
     // then
     expect(config).toEqual<ServerConfig>({
-      app: { port: 5000 },
+      app: { port: 8080 },
       audio: {
         ffmpegPath: 'ffmpeg',
         ffprobePath: 'ffprobe',
@@ -57,7 +57,7 @@ describe('ConfigurationSchema', () => {
       MEDIA_ENABLED: 'false',
       MEDIA_MAX_CONCURRENT_DOWNLOADS: '1',
       MEDIA_PREPARE_TIMEOUT_SECONDS: '60',
-      PORT: '8080',
+      PORT: '9090',
       SYNC_MAX_COVER_BYTES: '1024',
       SYNC_MAX_PUSH_BATCH: '10',
       SYNC_TOMBSTONE_RETENTION_DAYS: '7',
@@ -69,7 +69,7 @@ describe('ConfigurationSchema', () => {
 
     // then
     expect(config).toEqual<ServerConfig>({
-      app: { port: 8080 },
+      app: { port: 9090 },
       audio: {
         ffmpegPath: '/usr/bin/ffmpeg',
         ffprobePath: '/usr/bin/ffprobe',

@@ -39,7 +39,7 @@ describe('EnvSchema', () => {
       MEDIA_ENABLED: true,
       MEDIA_MAX_CONCURRENT_DOWNLOADS: 3,
       MEDIA_PREPARE_TIMEOUT_SECONDS: 300,
-      PORT: 5000,
+      PORT: 8080,
       SYNC_ENABLED: false,
       SYNC_MAX_COVER_BYTES: 5_242_880,
       SYNC_MAX_PUSH_BATCH: 500,
@@ -56,7 +56,7 @@ describe('EnvSchema', () => {
     const env = EnvSchema.parse({ AUTH_MODE: '', MEDIA_ENABLED: '', PORT: '' });
 
     // then
-    expect(env).toMatchObject({ AUTH_MODE: 'none', MEDIA_ENABLED: true, PORT: 5000 });
+    expect(env).toMatchObject({ AUTH_MODE: 'none', MEDIA_ENABLED: true, PORT: 8080 });
   });
 
   it('should coerce the numeric values', () => {
