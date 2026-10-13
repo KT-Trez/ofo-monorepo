@@ -39,6 +39,6 @@
     "source-map-support": "catalog:",
     "supertest": "catalog:",
     "ts-node": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:nest"
   }
 }

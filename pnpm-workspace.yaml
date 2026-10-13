@@ -42,6 +42,8 @@ catalogMode: strict
 catalogs:
   codegen:
     typescript: ^5.9.3 # for `openapi-typescript`
+  nest:
+    typescript: ^6.0.3 # Nest CLI needs the compiler API, which TypeScript 7.0 does not ship (back in 7.1)
 
 cleanupUnusedCatalogs: true
 minimumReleaseAge: 10080
