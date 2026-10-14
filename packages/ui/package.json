@@ -1,0 +1,26 @@
+{
+  "name": "@ofo/ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./theme/*": "./src/theme/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@ofo/typescript-config": "workspace:*",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "react-native": "catalog:",
+    "react-native-unistyles": "catalog:",
+    "type-fest": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react-native": "catalog:",
+    "react-native-unistyles": "catalog:"
+  }
+}

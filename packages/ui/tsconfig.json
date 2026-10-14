@@ -1,0 +1,10 @@
+{
+  "extends": "@ofo/typescript-config/tsconfig.library.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": []
+  }
+}

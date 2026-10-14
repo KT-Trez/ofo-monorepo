@@ -1,0 +1,59 @@
+@font-face {
+  font-display: block;
+  font-family: 'GeistMono_400Regular';
+  src: url('@expo-google-fonts/geist-mono/400Regular/GeistMono_400Regular.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'GeistMono_500Medium';
+  src: url('@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'GeistMono_600SemiBold';
+  src: url('@expo-google-fonts/geist-mono/600SemiBold/GeistMono_600SemiBold.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'GeistMono_700Bold';
+  src: url('@expo-google-fonts/geist-mono/700Bold/GeistMono_700Bold.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'GeistMono_800ExtraBold';
+  src: url('@expo-google-fonts/geist-mono/800ExtraBold/GeistMono_800ExtraBold.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Geist_400Regular';
+  src: url('@expo-google-fonts/geist/400Regular/Geist_400Regular.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Geist_500Medium';
+  src: url('@expo-google-fonts/geist/500Medium/Geist_500Medium.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Geist_600SemiBold';
+  src: url('@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Geist_700Bold';
+  src: url('@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Geist_800ExtraBold';
+  src: url('@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf');
+}

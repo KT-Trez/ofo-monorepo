@@ -29,9 +29,16 @@
       "rules": {
         "unicorn/consistent-function-scoping": "off"
       }
+    },
+    {
+      "files": ["packages/ui/src/theme/**"],
+      "rules": {
+        "sort-keys": "off"
+      }
     }
   ],
   "rules": {
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
     "sort-keys": "error",
     "vitest/require-mock-type-parameters": "off"
   }

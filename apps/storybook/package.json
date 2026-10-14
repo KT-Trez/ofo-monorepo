@@ -1,0 +1,31 @@
+{
+  "name": "@ofo/storybook",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "storybook build --output-dir dist",
+    "dev": "storybook dev --port 4000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo-google-fonts/geist": "catalog:",
+    "@expo-google-fonts/geist-mono": "catalog:",
+    "@ofo/ui": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-native": "catalog:",
+    "react-native-unistyles": "catalog:",
+    "react-native-web": "catalog:",
+    "type-fest": "catalog:"
+  },
+  "devDependencies": {
+    "@ofo/typescript-config": "workspace:*",
+    "@storybook/react-native-web-vite": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "storybook": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
