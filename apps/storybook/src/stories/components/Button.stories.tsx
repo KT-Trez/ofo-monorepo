@@ -38,16 +38,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
 
-export const Sizes: Story = {
-  render: args => (
-    <View style={styles.row}>
-      {Object.values(ButtonSize).map(size => (
-        <Button {...args} key={size} size={size} />
-      ))}
-    </View>
-  ),
-};
-
 export const Variants: Story = {
   render: args => (
     <View style={styles.row}>
@@ -55,6 +45,16 @@ export const Variants: Story = {
         <Button {...args} key={variant} variant={variant}>
           {variant}
         </Button>
+      ))}
+    </View>
+  ),
+};
+
+export const Sizes: Story = {
+  render: args => (
+    <View style={styles.row}>
+      {Object.values(ButtonSize).map(size => (
+        <Button {...args} key={size} size={size} />
       ))}
     </View>
   ),

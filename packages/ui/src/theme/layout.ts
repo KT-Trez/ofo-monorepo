@@ -29,6 +29,7 @@ export const size: Readonly<Record<ThemeSizes, number>> = {
   controlSm: 36,
   controlMd: 44,
   controlLg: 56,
+  controlXl: 72,
   field: 48,
   badge: 20,
   touchTarget: 48,

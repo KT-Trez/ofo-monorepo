@@ -8,6 +8,7 @@ export const darkColors: Readonly<Record<ThemeColors, string>> = {
   surfaceElevated: p.graphite750,
   surfaceHover: p.graphite700,
   surfaceInverse: p.graphite50,
+  surfaceInverseHover: p.graphite150,
 
   border: p.graphite750,
   borderStrong: p.graphite700,
@@ -47,6 +48,7 @@ export const lightColors: Readonly<Record<ThemeColors, string>> = {
   surfaceElevated: p.graphite150,
   surfaceHover: p.graphite200,
   surfaceInverse: p.graphite850,
+  surfaceInverseHover: p.graphite750,
 
   border: p.graphite200,
   borderStrong: p.graphite300,

@@ -18,6 +18,8 @@ export const ThemeColor = {
   SurfaceHover: 'surfaceHover',
   /** Inverted surface: toast, selection bar. */
   SurfaceInverse: 'surfaceInverse',
+  /** Hovered `surfaceInverse`, e.g. the inverse icon button on the web. Not in the design system yet. */
+  SurfaceInverseHover: 'surfaceInverseHover',
 
   /** Default divider and outline. */
   Border: 'border',
@@ -219,8 +221,10 @@ export const ThemeSize = {
   ControlSm: 'controlSm',
   /** Default buttons, icon buttons and segmented control; also the minimum touch target. */
   ControlMd: 'controlMd',
-  /** Previous/next icon buttons in the player. */
+  /** Previous/next icon buttons in the player; metronome controls. */
   ControlLg: 'controlLg',
+  /** The main round play button in the player. */
+  ControlXl: 'controlXl',
   /** Text field and autocomplete height. */
   Field: 'field',
   /** Badge height. */
