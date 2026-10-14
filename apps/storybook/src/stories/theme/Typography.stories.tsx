@@ -1,9 +1,8 @@
-import type { ThemeTextVariants } from '@ofo/ui/theme/types';
-import { typography } from '@ofo/ui/theme/typography';
-import type { Meta } from '@storybook/react-native-web-vite';
+import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import type { Story } from 'storybook/internal/toolsets-docs';
+import { ThemeTextVariant, type ThemeTextVariants } from '@ofo/ui/theme/types';
+import { typography } from '@ofo/ui/theme/typography';
 import { Section } from '../../components/Section';
 
 const samples: Record<ThemeTextVariants, string> = {
@@ -20,7 +19,7 @@ const samples: Record<ThemeTextVariants, string> = {
   titleSm: 'Synchronizacja',
 };
 
-const variants = Object.keys(typography.variants) as ThemeTextVariants[];
+const variants = Object.values(ThemeTextVariant);
 
 const TypographyScale = () => (
   <Section title="Text variants">
@@ -57,10 +56,13 @@ const styles = StyleSheet.create(theme => ({
   },
 }));
 
-export default {
+const meta = {
   component: TypographyScale,
   title: 'Theme/Typography',
 } satisfies Meta<typeof TypographyScale>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Typography: Story = {
   name: 'Typography',

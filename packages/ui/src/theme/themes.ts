@@ -2,15 +2,17 @@ import { darkColors, lightColors } from './colors';
 import { darkShadows, lightShadows } from './elevation';
 import { radius, size, space } from './layout';
 import { motion } from './motion';
+import { opacity } from './opacity';
 import type { AppTheme, AppThemes } from './types.ts';
 import { typography } from './typography';
 
 const base: Readonly<Omit<AppTheme, 'colors' | 'shadows'>> = {
-  typography,
-  space,
+  motion,
+  opacity,
   radius,
   size,
-  motion,
+  space,
+  typography,
 };
 
 export const darkTheme: Readonly<AppTheme> = {

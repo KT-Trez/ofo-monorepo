@@ -2,6 +2,8 @@ import type { ValueOf } from 'type-fest';
 
 // Colors
 
+// todo: systematize colors: color -> hover -> pressed
+
 /** Semantic color tokens. Components use only these, never `palette` directly. */
 export const ThemeColor = {
   /** Screen background. */
@@ -44,6 +46,8 @@ export const ThemeColor = {
   SuccessSubtle: 'successSubtle',
   Danger: 'danger',
   DangerSubtle: 'dangerSubtle',
+  /** Hovered `dangerSubtle`, e.g. the danger button on the web. Not in the design system yet. */
+  DangerSubtleHover: 'dangerSubtleHover',
   Info: 'info',
   InfoSubtle: 'infoSubtle',
 
@@ -120,7 +124,7 @@ export const ThemeTextVariant = {
   HeadingMd: 'headingMd',
   /** Section headings inside content, e.g. "Utwory w playliście". */
   HeadingSm: 'headingSm',
-  /** Bold one-line titles: settings row titles (e.g. "Synchronizacja"), large button label, compact top bar title. */
+  /** Bold one-line titles: settings row titles (e.g. "Synchronizacja"), compact top bar title. */
   TitleSm: 'titleSm',
   /** Default text: list row titles, text fields. */
   Body: 'body',
@@ -215,12 +219,14 @@ export const ThemeSize = {
   ControlSm: 'controlSm',
   /** Default buttons, icon buttons and segmented control; also the minimum touch target. */
   ControlMd: 'controlMd',
-  /** Large primary actions and the previous/next buttons in the player. */
+  /** Previous/next icon buttons in the player. */
   ControlLg: 'controlLg',
   /** Text field and autocomplete height. */
   Field: 'field',
   /** Badge height. */
   Badge: 'badge',
+  /** Minimum touch area (Android guideline). Smaller controls extend to it with `hitSlop`. */
+  TouchTarget: 'touchTarget',
 } as const;
 export type ThemeSizes = ValueOf<typeof ThemeSize>;
 
@@ -296,9 +302,18 @@ export const ThemePreference = {
 } as const;
 export type ThemePreferences = ValueOf<typeof ThemePreference>;
 
+// Opacity
+
+export const ThemeOpacity = {
+  /** Disabled controls: buttons, icon buttons. */
+  Disabled: 'disabled',
+} as const;
+export type ThemeOpacities = ValueOf<typeof ThemeOpacity>;
+
 export type AppTheme = {
   colors: Record<ThemeColors, string>;
   motion: ThemeMotion;
+  opacity: Record<ThemeOpacities, number>;
   radius: Record<ThemeRadii, number>;
   shadows: Record<ThemeShadows, string>;
   size: Record<ThemeSizes, number>;

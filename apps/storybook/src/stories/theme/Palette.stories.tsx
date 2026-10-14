@@ -1,9 +1,8 @@
-import { palette } from '@ofo/ui/theme/palette';
-import type { Meta } from '@storybook/react-native-web-vite';
+import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import type { ReactElement } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import type { Story } from 'storybook/internal/toolsets-docs';
+import { palette } from '@ofo/ui/theme/palette';
 import { Section } from '../../components/Section';
 import { Swatch } from '../../components/Swatch';
 
@@ -40,10 +39,13 @@ const styles = StyleSheet.create(theme => ({
   },
 }));
 
-export default {
+const meta = {
   component: PaletteGrid,
   title: 'Theme/Colors',
 } satisfies Meta<typeof PaletteGrid>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Palette: Story = {
   name: 'Palette',

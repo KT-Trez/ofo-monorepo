@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo-google-fonts/geist": "catalog:",
     "@expo-google-fonts/geist-mono": "catalog:",
+    "@expo-google-fonts/material-symbols-rounded": "catalog:",
     "@ofo/ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",

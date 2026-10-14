@@ -57,3 +57,27 @@
   font-family: 'Geist_800ExtraBold';
   src: url('@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf');
 }
+
+@font-face {
+  font-display: block;
+  font-family: 'MaterialSymbolsRounded_400Regular';
+  src: url('@expo-google-fonts/material-symbols-rounded/400Regular/MaterialSymbolsRounded_400Regular.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'MaterialSymbolsRounded_400Regular_Filled';
+  src: url('@expo-google-fonts/material-symbols-rounded/400Regular_Filled/MaterialSymbolsRounded_400Regular_Filled.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'MaterialSymbolsRounded_500Medium';
+  src: url('@expo-google-fonts/material-symbols-rounded/500Medium/MaterialSymbolsRounded_500Medium.ttf');
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'MaterialSymbolsRounded_500Medium_Filled';
+  src: url('@expo-google-fonts/material-symbols-rounded/500Medium_Filled/MaterialSymbolsRounded_500Medium_Filled.ttf');
+}

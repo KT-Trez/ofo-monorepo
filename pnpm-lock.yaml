@@ -199,6 +199,9 @@ catalogs:
     '@expo-google-fonts/geist-mono':
       specifier: ^0.4.3
       version: 0.4.3
+    '@expo-google-fonts/material-symbols-rounded':
+      specifier: ^0.4.61
+      version: 0.4.61
     '@nestjs/cli':
       specifier: ^12.0.7
       version: 12.0.7
@@ -455,6 +458,9 @@ importers:
       '@expo-google-fonts/geist-mono':
         specifier: 'catalog:'
         version: 0.4.3
+      '@expo-google-fonts/material-symbols-rounded':
+        specifier: 'catalog:'
+        version: 0.4.61
       '@ofo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -1141,6 +1147,9 @@ packages:
 
   '@expo-google-fonts/geist@0.4.2':
     resolution: {integrity: sha512-cTsqJRQrvK5EniTVwH7UDK18RFf9Bc6yxciAuM936aViQ+eR6j3mLEI2rQkJXz5JP9kwtn8tHJviDyZ0ulH6oA==}
+
+  '@expo-google-fonts/material-symbols-rounded@0.4.61':
+    resolution: {integrity: sha512-RzDg4RFTN4m3bSeSeDcEfbth5ucdrj7ybi+/+abd74/TXf4Y8f7w0+/EYB9Pg2JwWcI3wG/nb7R8XwzFkiihtg==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -5805,6 +5814,8 @@ snapshots:
   '@expo-google-fonts/geist-mono@0.4.3': {}
 
   '@expo-google-fonts/geist@0.4.2': {}
+
+  '@expo-google-fonts/material-symbols-rounded@0.4.61': {}
 
   '@img/colour@1.1.0': {}
 

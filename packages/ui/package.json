@@ -5,6 +5,7 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./components/*": "./src/components/*/index.ts",
     "./theme/*": "./src/theme/*.ts"
   },
   "scripts": {

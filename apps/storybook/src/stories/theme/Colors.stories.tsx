@@ -1,13 +1,12 @@
-import { darkColors, lightColors, type ThemeColors } from '@ofo/ui/theme/colors';
-import type { Meta } from '@storybook/react-native-web-vite';
+import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import type { Story } from 'storybook/internal/toolsets-docs';
-import type { KeyAsString } from 'type-fest';
+import { darkColors, lightColors } from '@ofo/ui/theme/colors';
+import { ThemeColor } from '@ofo/ui/theme/types';
 import { Section } from '../../components/Section';
 import { Swatch } from '../../components/Swatch';
 
-const tokens = Object.keys(darkColors) as KeyAsString<ThemeColors>[];
+const tokens = Object.values(ThemeColor);
 
 const ColorsTable = () => (
   <Section title="Color tokens">
@@ -56,10 +55,13 @@ const styles = StyleSheet.create(theme => ({
   },
 }));
 
-export default {
+const meta = {
   component: ColorsTable,
   title: 'Theme/Colors',
 } satisfies Meta<typeof ColorsTable>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Colors: Story = {
   name: 'Colors',

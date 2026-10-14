@@ -29,6 +29,7 @@ export const darkColors: Readonly<Record<ThemeColors, string>> = {
   successSubtle: 'rgba(61,214,140,0.14)',
   danger: p.red400,
   dangerSubtle: 'rgba(255,107,94,0.14)',
+  dangerSubtleHover: 'rgba(255,107,94,0.22)',
   info: p.blue400,
   infoSubtle: 'rgba(94,176,255,0.14)',
 
@@ -67,6 +68,7 @@ export const lightColors: Readonly<Record<ThemeColors, string>> = {
   successSubtle: 'rgba(30,158,94,0.12)',
   danger: p.red600,
   dangerSubtle: 'rgba(210,58,46,0.10)',
+  dangerSubtleHover: 'rgba(210,58,46,0.16)',
   info: p.blue600,
   infoSubtle: 'rgba(31,116,209,0.10)',
 

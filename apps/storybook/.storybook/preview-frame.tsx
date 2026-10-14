@@ -1,17 +1,14 @@
-import {
-  applyThemePreference,
-  configureTheme,
-  type ThemePreference,
-} from '@ofo/ui/theme/unistyles';
 import { type ReactNode, useEffect } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
+import type { ThemePreferences } from '@ofo/ui/theme/types';
+import { applyThemePreference, configureTheme } from '@ofo/ui/theme/unistyles';
 
 configureTheme();
 
 type PreviewFrameProps = {
   children: ReactNode;
-  preference: ThemePreference;
+  preference: ThemePreferences;
 };
 
 export const PreviewFrame = ({ children, preference }: PreviewFrameProps) => {
