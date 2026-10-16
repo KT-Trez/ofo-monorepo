@@ -31,6 +31,7 @@ export const size: Readonly<Record<ThemeSizes, number>> = {
   controlLg: 56,
   controlXl: 72,
   field: 48,
+  fieldLabelled: 58,
   badge: 20,
   checkbox: 22,
   sheetHandle: 36,

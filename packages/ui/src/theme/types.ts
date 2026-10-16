@@ -227,6 +227,8 @@ export const ThemeSize = {
   ControlXl: 'controlXl',
   /** Text field and autocomplete height. */
   Field: 'field',
+  /** Text field height with a label, which sits above the text inside the field. */
+  FieldLabelled: 'fieldLabelled',
   /** Badge height. */
   Badge: 'badge',
   /** Checkbox box, e.g. bulk selection in track rows. */
