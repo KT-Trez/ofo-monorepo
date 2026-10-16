@@ -1,6 +1,6 @@
-import { Switch } from '@ofo/ui/components/switch';
 import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import { useState } from 'react';
+import { Switch } from '@ofo/ui/components/switch';
 
 type SwitchPlaygroundProps = {
   isDisabled: boolean;

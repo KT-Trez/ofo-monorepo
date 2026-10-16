@@ -14,6 +14,8 @@ export const ButtonVariant = {
   Danger: 'danger',
   /** Transparent, for low-emphasis actions in toolbars and sheets. */
   Ghost: 'ghost',
+  /** Transparent amber text on `surfaceInverse`, e.g. the action of a toast ("Cofnij"). */
+  OnInverse: 'onInverse',
   /** Amber, for the single main action of a view. Only one per view. */
   Primary: 'primary',
   /** Neutral surface, for every other action. */

@@ -1,8 +1,8 @@
-import { Badge, BadgeColor } from '@ofo/ui/components/badge';
-import { IconGlyph } from '@ofo/ui/components/icon';
 import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
+import { Badge, BadgeColor } from '@ofo/ui/components/badge';
+import { IconGlyph } from '@ofo/ui/components/icon';
 
 const styles = StyleSheet.create(theme => ({
   column: {

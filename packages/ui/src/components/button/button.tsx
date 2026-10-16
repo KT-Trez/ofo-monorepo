@@ -18,6 +18,7 @@ const ICON_SIZE: Readonly<Record<ButtonSizes, number>> = { md: 20, sm: 18 };
 const LABEL_COLOR: Readonly<Record<ButtonVariants, ThemeColors>> = {
   danger: 'danger',
   ghost: 'textPrimary',
+  onInverse: 'accentPressed',
   primary: 'textOnAccent',
   secondary: 'textPrimary',
 };
@@ -104,6 +105,7 @@ const styles = StyleSheet.create(theme => ({
       variant: {
         danger: { backgroundColor: theme.colors.dangerSubtle },
         ghost: { backgroundColor: 'transparent' },
+        onInverse: { backgroundColor: 'transparent' },
         primary: { backgroundColor: theme.colors.accent },
         secondary: { backgroundColor: theme.colors.surfaceElevated },
       },
@@ -114,6 +116,7 @@ const styles = StyleSheet.create(theme => ({
       variant: {
         danger: { backgroundColor: theme.colors.dangerSubtleHover },
         ghost: { backgroundColor: theme.colors.surfaceRaised },
+        onInverse: { backgroundColor: theme.colors.surfaceInverseHover },
         primary: { backgroundColor: theme.colors.accentHover },
         secondary: { backgroundColor: theme.colors.surfaceHover },
       },
@@ -134,6 +137,7 @@ const styles = StyleSheet.create(theme => ({
       variant: {
         danger: { color: theme.colors.danger },
         ghost: { color: theme.colors.textPrimary },
+        onInverse: { color: theme.colors.accentPressed },
         primary: { color: theme.colors.textOnAccent },
         secondary: { color: theme.colors.textPrimary },
       },
@@ -145,6 +149,7 @@ const styles = StyleSheet.create(theme => ({
       variant: {
         danger: {},
         ghost: { backgroundColor: theme.colors.surfaceRaised },
+        onInverse: {},
         primary: { backgroundColor: theme.colors.accentPressed },
         secondary: { backgroundColor: theme.colors.surfaceHover },
       },
