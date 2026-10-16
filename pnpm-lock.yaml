@@ -542,6 +542,10 @@ importers:
   packages/typescript-config: {}
 
   packages/ui:
+    dependencies:
+      es-toolkit:
+        specifier: 'catalog:'
+        version: 1.52.0
     devDependencies:
       '@ofo/typescript-config':
         specifier: workspace:*

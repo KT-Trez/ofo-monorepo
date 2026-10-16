@@ -11,6 +11,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "es-toolkit": "catalog:"
+  },
   "devDependencies": {
     "@ofo/typescript-config": "workspace:*",
     "@types/react": "catalog:",
