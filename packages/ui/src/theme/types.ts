@@ -229,6 +229,16 @@ export const ThemeSize = {
   Field: 'field',
   /** Badge height. */
   Badge: 'badge',
+  /** Checkbox box, e.g. bulk selection in track rows. */
+  Checkbox: 'checkbox',
+  /** Width of the grab handle at the top of a bottom sheet. */
+  SheetHandle: 'sheetHandle',
+  /** Switch track height. */
+  SwitchHeight: 'switchHeight',
+  /** Switch thumb diameter; it sits centred in the track. */
+  SwitchThumb: 'switchThumb',
+  /** Switch track width. */
+  SwitchWidth: 'switchWidth',
   /** Minimum touch area (Android guideline). Smaller controls extend to it with `hitSlop`. */
   TouchTarget: 'touchTarget',
 } as const;

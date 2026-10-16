@@ -32,5 +32,10 @@ export const size: Readonly<Record<ThemeSizes, number>> = {
   controlXl: 72,
   field: 48,
   badge: 20,
+  checkbox: 22,
+  sheetHandle: 36,
+  switchHeight: 28,
+  switchThumb: 22,
+  switchWidth: 48,
   touchTarget: 48,
 };
