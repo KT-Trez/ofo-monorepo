@@ -562,6 +562,9 @@ importers:
       react-native-unistyles:
         specifier: 'catalog:'
         version: 3.5.0(c45b3bbb9258f546afcb1d22ef103205)
+      react-native-web:
+        specifier: 'catalog:'
+        version: 0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       type-fest:
         specifier: 'catalog:'
         version: 5.10.0

@@ -1,6 +1,6 @@
-import { Checkbox, type CheckboxProps } from '@ofo/ui/components/checkbox';
 import type { Meta, StoryObj } from '@storybook/react-native-web-vite';
 import { useState } from 'react';
+import { Checkbox, type CheckboxProps } from '@ofo/ui/components/checkbox';
 
 const CheckboxPlayground = ({
   isDisabled,

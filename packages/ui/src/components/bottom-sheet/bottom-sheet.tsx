@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   Animated,
-  Dimensions,
   Easing,
   Modal,
   Platform,
   Pressable,
   ScrollView,
   Text,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
@@ -23,6 +23,7 @@ export const BottomSheet = ({
   title,
 }: BottomSheetProps) => {
   const [isMounted, setIsMounted] = useState(isOpen);
+  const { height: windowHeight } = useWindowDimensions();
   const { theme } = useUnistyles();
   const visibility = useRef(new Animated.Value(0)).current;
 
@@ -66,7 +67,7 @@ export const BottomSheet = ({
                   translateY: visibility.interpolate({
                     inputRange: [0, 1],
                     // starts below the screen; the exact panel height does not matter.
-                    outputRange: [Dimensions.get('window').height, 0],
+                    outputRange: [windowHeight, 0],
                   }),
                 },
               ],

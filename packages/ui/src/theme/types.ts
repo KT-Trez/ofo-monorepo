@@ -130,7 +130,7 @@ export const ThemeTextVariant = {
   TitleSm: 'titleSm',
   /** Default text: list row titles, text fields. */
   Body: 'body',
-  /** Toast text, segmented control, mini-player title, small buttons, messages in sheets. */
+  /** Toast text, tabs, mini-player title, small buttons, messages in sheets. */
   BodySm: 'bodySm',
   /** Secondary lines: artist, track count, descriptions. */
   Caption: 'caption',
@@ -217,9 +217,9 @@ export const ThemeSize = {
   Row: 'row',
   /** Cover thumbnail size in list rows. */
   CoverRow: 'coverRow',
-  /** Small buttons and icon buttons, compact segmented control. */
+  /** Small buttons and icon buttons, small tabs. */
   ControlSm: 'controlSm',
-  /** Default buttons, icon buttons and segmented control; also the minimum touch target. */
+  /** Default buttons, icon buttons and tabs; also the minimum touch target. */
   ControlMd: 'controlMd',
   /** Previous/next icon buttons in the player; metronome controls. */
   ControlLg: 'controlLg',
