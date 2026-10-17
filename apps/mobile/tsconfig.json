@@ -1,20 +1,19 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": ["expo/tsconfig.base.json", "@ofo/typescript-config/tsconfig.base.json"],
+  "include": ["src", ".expo/types/**/*.ts", "expo-env.d.ts"],
   "compilerOptions": {
-    "strict": true,
+    // Imports keep their `.ts` extension, here and in `@ofo/ui`; Metro bundles, tsc only checks
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "jsx": "react-jsx",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    // `@ofo/ui` has its own copy of Unistyles; point both at the app's one, as `metro.config.cjs` does at runtime
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/assets/*": [
-        "./assets/*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+      "react-native-unistyles": ["./node_modules/react-native-unistyles"]
+    },
+    "types": [],
+    "verbatimModuleSyntax": true
+  }
 }
