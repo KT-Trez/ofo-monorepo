@@ -1,0 +1,9 @@
+{
+  "extends": "@ofo/typescript-config/tsconfig.library.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": []
+  }
+}
