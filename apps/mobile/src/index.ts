@@ -1,4 +1,4 @@
 // oxlint-disable import/no-unassigned-import
-// Unistyles has to be configured before any `StyleSheet.create` runs, so before the router loads the routes
-import './unistyles.ts';
+import './i18n.ts';
+import './unistyles.ts'; // has to be configured before any `StyleSheet.create` runs (before routes)
 import 'expo-router/entry';

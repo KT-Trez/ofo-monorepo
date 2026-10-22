@@ -8,12 +8,23 @@ import { Geist_500Medium } from '@expo-google-fonts/geist/500Medium';
 import { Geist_600SemiBold } from '@expo-google-fonts/geist/600SemiBold';
 import { Geist_700Bold } from '@expo-google-fonts/geist/700Bold';
 import { Geist_800ExtraBold } from '@expo-google-fonts/geist/800ExtraBold';
-import { MaterialSymbolsRounded_400Regular } from '@expo-google-fonts/material-symbols-rounded/400Regular';
-import { MaterialSymbolsRounded_400Regular_Filled } from '@expo-google-fonts/material-symbols-rounded/400Regular_Filled';
-import { MaterialSymbolsRounded_500Medium } from '@expo-google-fonts/material-symbols-rounded/500Medium';
-import { MaterialSymbolsRounded_500Medium_Filled } from '@expo-google-fonts/material-symbols-rounded/500Medium_Filled';
+import {
+  MaterialSymbolsRounded_400Regular,
+} from '@expo-google-fonts/material-symbols-rounded/400Regular';
+import {
+  MaterialSymbolsRounded_400Regular_Filled,
+} from '@expo-google-fonts/material-symbols-rounded/400Regular_Filled';
+import {
+  MaterialSymbolsRounded_500Medium,
+} from '@expo-google-fonts/material-symbols-rounded/500Medium';
+import {
+  MaterialSymbolsRounded_500Medium_Filled,
+} from '@expo-google-fonts/material-symbols-rounded/500Medium_Filled';
+import { useFonts } from 'expo-font';
+import { hideAsync } from 'expo-splash-screen';
+import { useEffect } from 'react';
 
-export const fonts = {
+export const DEFAULT_FONTS = {
   GeistMono_400Regular,
   GeistMono_500Medium,
   GeistMono_600SemiBold,
@@ -28,4 +39,15 @@ export const fonts = {
   MaterialSymbolsRounded_400Regular_Filled,
   MaterialSymbolsRounded_500Medium,
   MaterialSymbolsRounded_500Medium_Filled,
+};
+
+export const useFontsLoader = () => {
+  const [isLoaded, error] = useFonts(DEFAULT_FONTS);
+  const isReady = isLoaded || error !== null;
+
+  useEffect(() => {
+    if (isReady) {
+      void hideAsync();
+    }
+  }, [isReady]);
 };

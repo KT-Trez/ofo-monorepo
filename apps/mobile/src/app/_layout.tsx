@@ -1,28 +1,35 @@
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen';
+import { preventAutoHideAsync } from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native-unistyles';
-import { fonts } from '../fonts.ts';
+import {
+  NavigationThemeProvider,
+} from '../components/navigation-theme-provider/navigation-theme-provider.tsx';
+import { useFontsLoader } from '../hooks/use-fonts-loader.ts';
 
 void preventAutoHideAsync();
 
 export default () => {
-  const [isLoaded, error] = useFonts(fonts);
-  const isReady = isLoaded || error !== null;
-
-  useEffect(() => {
-    if (isReady) {
-      void hideAsync();
-    }
-  }, [isReady]);
+  useFontsLoader();
 
   return (
     <GestureHandlerRootView style={styles.root}>
-      <StatusBar style="auto" />
-      <Stack screenOptions={{ contentStyle: styles.screen, headerShown: false }} />
+      <NavigationThemeProvider>
+        <StatusBar style="auto" />
+
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="player"
+            options={{ animation: 'slide_from_bottom', presentation: 'fullScreenModal' }}
+          />
+          <Stack.Screen
+            name="playlist/[id]/add-tracks"
+            options={{ animation: 'slide_from_bottom', presentation: 'fullScreenModal' }}
+          />
+        </Stack>
+      </NavigationThemeProvider>
     </GestureHandlerRootView>
   );
 };
@@ -31,8 +38,5 @@ const styles = StyleSheet.create(theme => ({
   root: {
     backgroundColor: theme.colors.bg,
     flex: 1,
-  },
-  screen: {
-    backgroundColor: theme.colors.bg,
   },
 }));
