@@ -39,6 +39,38 @@
   ],
   "rules": {
     "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+    "jsdoc/check-tag-names": [
+      "error",
+      {
+        "definedTags": [
+          "alpha",
+          "beta",
+          "decorator",
+          "defaultValue",
+          "deprecated",
+          "eventProperty",
+          "example",
+          "experimental",
+          "inheritDoc",
+          "internal",
+          "label",
+          "link",
+          "override",
+          "packageDocumentation",
+          "param",
+          "privateRemarks",
+          "public",
+          "readonly",
+          "remarks",
+          "returns",
+          "sealed",
+          "see",
+          "throws",
+          "typeParam",
+          "virtual"
+        ]
+      }
+    ],
     "sort-keys": "error",
     "vitest/require-mock-type-parameters": "off"
   }

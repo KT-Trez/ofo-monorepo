@@ -5,5 +5,11 @@ export default defineConfig({
   // also emits `drizzle/migrations.js`, which bundles the SQL files
   driver: 'expo',
   out: './drizzle',
-  schema: ['./src/schema/artist.ts', './src/schema/playlist.ts', './src/schema/track.ts'],
+  schema: [
+    './src/schema/artist.entity.ts',
+    './src/schema/playlist.entity.ts',
+    './src/schema/playlist-local.entity.ts',
+    './src/schema/track.entity.ts',
+    './src/schema/track-local.entity.ts',
+  ],
 });

@@ -1,0 +1,563 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "2899b426-6bf5-411e-bce4-ac108e5a7ef5",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "artist": {
+      "name": "artist",
+      "columns": {
+        "uid": {
+          "name": "uid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "artist_source_unique": {
+          "name": "artist_source_unique",
+          "columns": [
+            "source",
+            "source_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "artist_name_check": {
+          "name": "artist_name_check",
+          "value": "\"artist\".\"name\" <> '' AND \"artist\".\"name\" = trim(\"artist\".\"name\")"
+        },
+        "artist_source_check": {
+          "name": "artist_source_check",
+          "value": "\"artist\".\"source\" IN ('youtube')"
+        },
+        "artist_source_id_check": {
+          "name": "artist_source_id_check",
+          "value": "(\"artist\".\"source\" IS NULL) = (\"artist\".\"source_id\" IS NULL)"
+        },
+        "artist_source_id_text_check": {
+          "name": "artist_source_id_text_check",
+          "value": "\"artist\".\"source_id\" <> '' AND \"artist\".\"source_id\" = trim(\"artist\".\"source_id\")"
+        }
+      }
+    },
+    "playlist": {
+      "name": "playlist",
+      "columns": {
+        "uid": {
+          "name": "uid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cover_hash": {
+          "name": "cover_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cover_kind": {
+          "name": "cover_kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'none'"
+        },
+        "is_sync_enabled": {
+          "name": "is_sync_enabled",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "playlist_cover_hash_check": {
+          "name": "playlist_cover_hash_check",
+          "value": "(\"playlist\".\"cover_kind\" = 'none') = (\"playlist\".\"cover_hash\" IS NULL)"
+        },
+        "playlist_cover_kind_check": {
+          "name": "playlist_cover_kind_check",
+          "value": "\"playlist\".\"cover_kind\" IN ('custom', 'none')"
+        },
+        "playlist_is_sync_enabled_check": {
+          "name": "playlist_is_sync_enabled_check",
+          "value": "\"playlist\".\"is_sync_enabled\" IN (0, 1)"
+        },
+        "playlist_title_check": {
+          "name": "playlist_title_check",
+          "value": "\"playlist\".\"title\" <> '' AND \"playlist\".\"title\" = trim(\"playlist\".\"title\")"
+        }
+      }
+    },
+    "playlist_track": {
+      "name": "playlist_track",
+      "columns": {
+        "playlist_uid": {
+          "name": "playlist_uid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sort_key": {
+          "name": "sort_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "track_uid": {
+          "name": "track_uid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "playlist_track_order_index": {
+          "name": "playlist_track_order_index",
+          "columns": [
+            "playlist_uid",
+            "sort_key",
+            "track_uid"
+          ],
+          "isUnique": false
+        },
+        "playlist_track_track_uid_index": {
+          "name": "playlist_track_track_uid_index",
+          "columns": [
+            "track_uid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "playlist_track_playlist_uid_playlist_uid_fk": {
+          "name": "playlist_track_playlist_uid_playlist_uid_fk",
+          "tableFrom": "playlist_track",
+          "tableTo": "playlist",
+          "columnsFrom": [
+            "playlist_uid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "playlist_track_track_uid_track_uid_fk": {
+          "name": "playlist_track_track_uid_track_uid_fk",
+          "tableFrom": "playlist_track",
+          "tableTo": "track",
+          "columnsFrom": [
+            "track_uid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "playlist_track_playlist_uid_track_uid_pk": {
+          "columns": [
+            "playlist_uid",
+            "track_uid"
+          ],
+          "name": "playlist_track_playlist_uid_track_uid_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "playlist_track_sort_key_check": {
+          "name": "playlist_track_sort_key_check",
+          "value": "\"playlist_track\".\"sort_key\" <> ''"
+        }
+      }
+    },
+    "playlist_local": {
+      "name": "playlist_local",
+      "columns": {
+        "playlist_uid": {
+          "name": "playlist_uid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "last_opened_at": {
+          "name": "last_opened_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sort_mode": {
+          "name": "sort_mode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'custom_asc'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "playlist_local_playlist_uid_playlist_uid_fk": {
+          "name": "playlist_local_playlist_uid_playlist_uid_fk",
+          "tableFrom": "playlist_local",
+          "tableTo": "playlist",
+          "columnsFrom": [
+            "playlist_uid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "playlist_local_sort_mode_check": {
+          "name": "playlist_local_sort_mode_check",
+          "value": "\"playlist_local\".\"sort_mode\" IN ('custom_asc', 'custom_desc', 'name_asc', 'name_desc')"
+        }
+      }
+    },
+    "track": {
+      "name": "track",
+      "columns": {
+        "uid": {
+          "name": "uid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "artist_uid": {
+          "name": "artist_uid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cover_hash": {
+          "name": "cover_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cover_kind": {
+          "name": "cover_kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'none'"
+        },
+        "duration_ms": {
+          "name": "duration_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "released_at": {
+          "name": "released_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "track_artist_uid_index": {
+          "name": "track_artist_uid_index",
+          "columns": [
+            "artist_uid"
+          ],
+          "isUnique": false
+        },
+        "track_source_unique": {
+          "name": "track_source_unique",
+          "columns": [
+            "source",
+            "source_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "track_artist_uid_artist_uid_fk": {
+          "name": "track_artist_uid_artist_uid_fk",
+          "tableFrom": "track",
+          "tableTo": "artist",
+          "columnsFrom": [
+            "artist_uid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "track_cover_hash_check": {
+          "name": "track_cover_hash_check",
+          "value": "(\"track\".\"cover_kind\" = 'none') = (\"track\".\"cover_hash\" IS NULL)"
+        },
+        "track_cover_kind_check": {
+          "name": "track_cover_kind_check",
+          "value": "\"track\".\"cover_kind\" IN ('custom', 'none', 'original')"
+        },
+        "track_duration_ms_check": {
+          "name": "track_duration_ms_check",
+          "value": "\"track\".\"duration_ms\" > 0"
+        },
+        "track_source_check": {
+          "name": "track_source_check",
+          "value": "\"track\".\"source\" IN ('youtube')"
+        },
+        "track_source_id_check": {
+          "name": "track_source_id_check",
+          "value": "\"track\".\"source_id\" <> '' AND \"track\".\"source_id\" = trim(\"track\".\"source_id\")"
+        },
+        "track_title_check": {
+          "name": "track_title_check",
+          "value": "\"track\".\"title\" <> '' AND \"track\".\"title\" = trim(\"track\".\"title\")"
+        }
+      }
+    },
+    "track_local": {
+      "name": "track_local",
+      "columns": {
+        "error_code": {
+          "name": "error_code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "file_format": {
+          "name": "file_format",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "file_size_bytes": {
+          "name": "file_size_bytes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "queued_at": {
+          "name": "queued_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "track_uid": {
+          "name": "track_uid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "track_local_status_index": {
+          "name": "track_local_status_index",
+          "columns": [
+            "status",
+            "queued_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "track_local_track_uid_track_uid_fk": {
+          "name": "track_local_track_uid_track_uid_fk",
+          "tableFrom": "track_local",
+          "tableTo": "track",
+          "columnsFrom": [
+            "track_uid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "track_local_error_code_check": {
+          "name": "track_local_error_code_check",
+          "value": "(\"track_local\".\"status\" = 'failed') = (\"track_local\".\"error_code\" IS NOT NULL)"
+        },
+        "track_local_file_check": {
+          "name": "track_local_file_check",
+          "value": "(\"track_local\".\"status\" = 'downloaded') = (\"track_local\".\"file_path\" IS NOT NULL) AND (\"track_local\".\"status\" = 'downloaded') = (\"track_local\".\"file_size_bytes\" IS NOT NULL) AND (\"track_local\".\"status\" = 'downloaded') = (\"track_local\".\"file_format\" IS NOT NULL)"
+        },
+        "track_local_file_format_check": {
+          "name": "track_local_file_format_check",
+          "value": "\"track_local\".\"file_format\" IN ('m4a', 'opus')"
+        },
+        "track_local_file_size_bytes_check": {
+          "name": "track_local_file_size_bytes_check",
+          "value": "\"track_local\".\"file_size_bytes\" > 0"
+        },
+        "track_local_queued_at_check": {
+          "name": "track_local_queued_at_check",
+          "value": "\"track_local\".\"status\" <> 'queued' OR \"track_local\".\"queued_at\" IS NOT NULL"
+        },
+        "track_local_status_check": {
+          "name": "track_local_status_check",
+          "value": "\"track_local\".\"status\" IN ('cancelled', 'downloaded', 'downloading', 'failed', 'not_downloaded', 'queued')"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

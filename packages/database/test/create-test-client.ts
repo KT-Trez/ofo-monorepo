@@ -11,7 +11,7 @@ export const createTestClient = (): DatabaseClient => {
 
   const db = drizzle(sqlite);
   const genRandomUid = createRandomUidGenerator(array => webcrypto.getRandomValues(array));
-  migrate(db, { migrationsFolder: new URL('../../drizzle', import.meta.url).pathname });
+  migrate(db, { migrationsFolder: new URL('../drizzle', import.meta.url).pathname });
 
   return {
     db,
