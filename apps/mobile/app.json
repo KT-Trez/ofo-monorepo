@@ -7,9 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "ofo",
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "icon": "./assets/expo.icon"
-    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -19,10 +16,6 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "pm.was.ofo"
-    },
-    "web": {
-      "output": "single",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",

@@ -6,12 +6,16 @@ import { StyleSheet } from 'react-native-unistyles';
 import {
   NavigationThemeProvider,
 } from '../components/navigation-theme-provider/navigation-theme-provider.tsx';
-import { useFontsLoader } from '../hooks/use-fonts-loader.ts';
+import { useAppLoader } from '../hooks/use-app-loader.ts';
 
 void preventAutoHideAsync();
 
 export default () => {
-  useFontsLoader();
+  const isAppLoaded = useAppLoader();
+
+  if (!isAppLoaded) {
+    return null;
+  }
 
   return (
     <GestureHandlerRootView style={styles.root}>

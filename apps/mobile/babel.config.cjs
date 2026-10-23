@@ -3,7 +3,10 @@ module.exports = api => {
   api.cache(true);
 
   return {
-    plugins: [['react-native-unistyles/plugin', { root: 'src' }]],
+    plugins: [
+      ['inline-import', { extensions: ['.sql'] }], // `@ofo/database`: `drizzle/migrations.js`
+      ['react-native-unistyles/plugin', { root: 'src' }],
+    ],
     presets: ['babel-preset-expo'],
   };
 };

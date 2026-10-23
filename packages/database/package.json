@@ -1,0 +1,43 @@
+{
+  "name": "@ofo/database",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./expo": "./src/drivers/expo.ts",
+    "./repositories/*": "./src/repositories/*.ts",
+    "./schema/*": "./src/schema/*.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "catalog:",
+    "es-toolkit": "catalog:"
+  },
+  "devDependencies": {
+    "@ofo/typescript-config": "workspace:*",
+    "@types/better-sqlite3": "catalog:",
+    "@types/node": "catalog:",
+    "better-sqlite3": "catalog:",
+    "drizzle-kit": "catalog:",
+    "expo-crypto": "catalog:",
+    "expo-sqlite": "catalog:",
+    "type-fest": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "expo-crypto": "catalog:",
+    "expo-sqlite": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "expo-crypto": {
+      "optional": true
+    },
+    "expo-sqlite": {
+      "optional": true
+    }
+  }
+}

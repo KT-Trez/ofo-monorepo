@@ -56,6 +56,14 @@ export default defineConfig({
         extends: true,
         test: {
           include: ['src/**/*.spec.ts'],
+          name: 'database',
+          root: 'packages/database',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          include: ['src/**/*.spec.ts'],
           name: 'ytdlp',
           root: 'packages/ytdlp',
         },

@@ -3,6 +3,7 @@ packages:
   - 'packages/*'
 allowBuilds:
   '@swc/core': true
+  better-sqlite3: true
   esbuild: true
   sharp: true
 catalog:
@@ -19,24 +20,31 @@ catalog:
   '@nestjs/testing': ^12.1.0
   '@storybook/react-native-web-vite': ~10.6.1
   '@swc/core': ^1.16.2
+  '@types/better-sqlite3': ^9.6.0
   '@types/express': ^5.0.6
   '@types/node': ^26.6.3
   '@types/react': ~19.2.18
   '@types/react-dom': ~19.2.7
   '@types/supertest': ^7.2.1
   '@vitest/coverage-v8': ^5.0.2
+  babel-plugin-inline-import: ^3.0.0
   babel-preset-expo: ~57.0.14
+  better-sqlite3: ^13.0.3
   class-transformer: ^0.5.1
   class-validator: ^0.15.1
+  drizzle-kit: ^0.31.11
+  drizzle-orm: ^0.45.4
   es-toolkit: ^1.52.0
   expo: ~57.0.27
   expo-constants: ~57.0.21
+  expo-crypto: ~57.0.4
   expo-dev-client: ~57.0.19
   expo-font: ~57.0.4
   expo-linking: ~57.0.12
   expo-localization: ~57.0.2
   expo-router: ~57.0.25
   expo-splash-screen: ~57.0.9
+  expo-sqlite: ~57.0.4
   expo-status-bar: ~57.0.1
   expo-system-ui: ~57.0.4
   helmet: ^8.3.0

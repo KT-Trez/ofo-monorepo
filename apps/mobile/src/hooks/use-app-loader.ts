@@ -20,9 +20,11 @@ import {
 import {
   MaterialSymbolsRounded_500Medium_Filled,
 } from '@expo-google-fonts/material-symbols-rounded/500Medium_Filled';
+import { prepareDatabase } from '@ofo/database/expo';
 import { useFonts } from 'expo-font';
 import { hideAsync } from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { databaseClient } from '../database.ts';
 
 export const DEFAULT_FONTS = {
   GeistMono_400Regular,
@@ -41,13 +43,30 @@ export const DEFAULT_FONTS = {
   MaterialSymbolsRounded_500Medium_Filled,
 };
 
-export const useFontsLoader = () => {
-  const [isLoaded, error] = useFonts(DEFAULT_FONTS);
-  const isReady = isLoaded || error !== null;
+export const useAppLoader = () => {
+  const [isFontLoaded, fontError] = useFonts(DEFAULT_FONTS);
+  const [dbError, setDbError] = useState<unknown>(null);
+  const [isDbLoaded, setIsDbLoaded] = useState(false);
+
+  const isLoaded = isDbLoaded && isFontLoaded;
 
   useEffect(() => {
-    if (isReady) {
+    prepareDatabase(databaseClient).then(() => setIsDbLoaded(true), setDbError);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
       void hideAsync();
     }
-  }, [isReady]);
+  }, [isLoaded]);
+
+  if (dbError !== null) {
+    throw dbError;
+  }
+
+  if (fontError !== null) {
+    throw fontError;
+  }
+
+  return isLoaded;
 };

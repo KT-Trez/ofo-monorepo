@@ -6,28 +6,28 @@
   "scripts": {
     "android": "expo run:android",
     "dev": "expo start",
-    "ios": "expo run:ios",
-    "typecheck": "tsc --noEmit",
-    "web": "expo start --web"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@expo-google-fonts/geist": "catalog:",
     "@expo-google-fonts/geist-mono": "catalog:",
     "@expo-google-fonts/material-symbols-rounded": "catalog:",
+    "@ofo/database": "workspace:*",
     "@ofo/i18n": "workspace:*",
     "@ofo/ui": "workspace:*",
     "expo": "catalog:",
     "expo-constants": "catalog:",
+    "expo-crypto": "catalog:",
     "expo-dev-client": "catalog:",
     "expo-font": "catalog:",
     "expo-linking": "catalog:",
     "expo-localization": "catalog:",
     "expo-router": "catalog:",
     "expo-splash-screen": "catalog:",
+    "expo-sqlite": "catalog:",
     "expo-status-bar": "catalog:",
     "expo-system-ui": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
     "react-native": "catalog:",
     "react-native-gesture-handler": "catalog:",
     "react-native-nitro-modules": "catalog:",
@@ -35,12 +35,12 @@
     "react-native-safe-area-context": "catalog:",
     "react-native-screens": "catalog:",
     "react-native-unistyles": "catalog:",
-    "react-native-web": "catalog:",
     "react-native-worklets": "catalog:"
   },
   "devDependencies": {
     "@ofo/typescript-config": "workspace:*",
     "@types/react": "catalog:",
+    "babel-plugin-inline-import": "catalog:",
     "babel-preset-expo": "catalog:",
     "typescript": "catalog:"
   }
