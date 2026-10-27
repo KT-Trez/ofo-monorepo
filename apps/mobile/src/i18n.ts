@@ -1,9 +1,28 @@
-import { initI18n, LanguagePreference, pickLanguage } from '@ofo/i18n';
+import {
+  changeLanguage,
+  initI18n,
+  isLanguage,
+  LanguagePreference,
+  type LanguagePreferences,
+  pickLanguage,
+} from '@ofo/i18n';
 import { getLocales } from 'expo-localization';
+import { Storage } from 'expo-sqlite/kv-store';
 
 const DEVICE_LANGUAGES = getLocales()
   .map(locale => locale.languageCode)
   .filter(languageCode => languageCode !== null);
+const LANGUAGE_PREFERENCE_KEY = 'languagePreference';
 
-// todo: read the saved preference (expo-sqlite kv-store) once settings are persisted
-initI18n(pickLanguage(LanguagePreference.System, DEVICE_LANGUAGES));
+export const applyLanguagePreference = (preference: LanguagePreferences) => {
+  Storage.setItemSync(LANGUAGE_PREFERENCE_KEY, preference);
+  changeLanguage(pickLanguage(preference, DEVICE_LANGUAGES));
+};
+
+const readLanguagePreference = (): LanguagePreferences => {
+  const saved = Storage.getItemSync(LANGUAGE_PREFERENCE_KEY);
+
+  return isLanguage(saved) ? saved : LanguagePreference.System;
+};
+
+initI18n(pickLanguage(readLanguagePreference(), DEVICE_LANGUAGES));

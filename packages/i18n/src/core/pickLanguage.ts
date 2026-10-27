@@ -7,7 +7,9 @@ import {
 
 const AVAILABLE_LANGUAGES: readonly string[] = Object.values(Language);
 
-const isLanguage = (code: string): code is Languages => AVAILABLE_LANGUAGES.includes(code);
+export const isLanguage = (code: string | null): code is Languages => {
+  return !!code && AVAILABLE_LANGUAGES.includes(code);
+};
 
 /**
  * Picks the language for a preference.
