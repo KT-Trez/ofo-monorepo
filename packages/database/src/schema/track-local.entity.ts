@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm';
 import { check, index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { isOneOf, unsafeSqlText } from './common.check.ts';
 import { timestamp } from './timestamp.fragment.ts';
+import { timestamps } from './timestamps.fragment.ts';
 import { AUDIO_FORMATS, DOWNLOAD_STATUSES, DownloadStatus } from './track-local.constants.ts';
 import { track } from './track.entity.ts';
 import { uid } from './uid.fragment.ts';
@@ -10,6 +11,7 @@ export const trackLocal = sqliteTable(
   'track_local',
   // oxlint-disable sort-keys
   {
+    ...timestamps(),
     errorCode: integer('error_code'),
     fileFormat: text('file_format', { enum: AUDIO_FORMATS }),
     filePath: text('file_path'),

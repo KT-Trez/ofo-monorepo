@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "2899b426-6bf5-411e-bce4-ac108e5a7ef5",
+  "id": "80cadb96-f359-4ff9-9d44-e9adb82ea145",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "artist": {
@@ -251,6 +251,20 @@
     "playlist_local": {
       "name": "playlist_local",
       "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "playlist_uid": {
           "name": "playlist_uid",
           "type": "text",
@@ -445,6 +459,20 @@
     "track_local": {
       "name": "track_local",
       "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "error_code": {
           "name": "error_code",
           "type": "integer",

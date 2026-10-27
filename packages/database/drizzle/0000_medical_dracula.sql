@@ -39,6 +39,8 @@ CREATE TABLE `playlist_track` (
 CREATE INDEX `playlist_track_order_index` ON `playlist_track` (`playlist_uid`,`sort_key`,`track_uid`);--> statement-breakpoint
 CREATE INDEX `playlist_track_track_uid_index` ON `playlist_track` (`track_uid`);--> statement-breakpoint
 CREATE TABLE `playlist_local` (
+	`created_at` integer NOT NULL,
+	`updated_at` integer NOT NULL,
 	`playlist_uid` text PRIMARY KEY NOT NULL,
 	`last_opened_at` integer NOT NULL,
 	`sort_mode` text DEFAULT 'custom_asc' NOT NULL,
@@ -70,6 +72,8 @@ CREATE TABLE `track` (
 CREATE INDEX `track_artist_uid_index` ON `track` (`artist_uid`);--> statement-breakpoint
 CREATE UNIQUE INDEX `track_source_unique` ON `track` (`source`,`source_id`);--> statement-breakpoint
 CREATE TABLE `track_local` (
+	`created_at` integer NOT NULL,
+	`updated_at` integer NOT NULL,
 	`error_code` integer,
 	`file_format` text,
 	`file_path` text,

@@ -3,12 +3,14 @@ import { isOneOf } from './common.check.ts';
 import { PLAYLIST_SORT_MODES, PlaylistSortMode } from './playlist-local.constants.ts';
 import { playlist } from './playlist.entity.ts';
 import { timestamp } from './timestamp.fragment.ts';
+import { timestamps } from './timestamps.fragment.ts';
 import { uid } from './uid.fragment.ts';
 
 export const playlistLocal = sqliteTable(
   'playlist_local',
   // oxlint-disable sort-keys
   {
+    ...timestamps(),
     playlistUid: uid('playlist_uid')
       .primaryKey()
       .references(() => playlist.uid, { onDelete: 'cascade' }),

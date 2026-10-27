@@ -4,7 +4,7 @@ import { getRandomValues } from 'expo-crypto';
 import type { SQLiteDatabase } from 'expo-sqlite';
 import migrations from '../../drizzle/migrations.js';
 import { createRandomUidGenerator } from '../core/uid.ts';
-import { createDownloadRepository } from '../repositories/downloads.ts';
+import { DownloadRepository } from '../repositories/download.repository.ts';
 import type { DatabaseClient } from '../types.ts';
 
 export type ExpoDatabaseClient = DatabaseClient & {
@@ -38,7 +38,5 @@ export const createDatabaseClient = (sqlite: SQLiteDatabase): ExpoDatabaseClient
 
 export const prepareDatabase = async (client: ExpoDatabaseClient) => {
   await migrate(client.db, migrations);
-  await createDownloadRepository(client).reconcileInterrupted();
+  await new DownloadRepository(client).failInterrupted();
 };
-
-export { useLiveQuery } from 'drizzle-orm/expo-sqlite';
