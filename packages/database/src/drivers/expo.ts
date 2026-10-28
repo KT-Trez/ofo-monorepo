@@ -1,7 +1,7 @@
 import { drizzle, type ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
 import { getRandomValues } from 'expo-crypto';
-import type { SQLiteDatabase } from 'expo-sqlite';
+import { addDatabaseChangeListener, type SQLiteDatabase } from 'expo-sqlite';
 import migrations from '../../drizzle/migrations.js';
 import { createRandomUidGenerator } from '../core/uid.ts';
 import { DownloadRepository } from '../repositories/download.repository.ts';
@@ -32,6 +32,11 @@ export const createDatabaseClient = (sqlite: SQLiteDatabase): ExpoDatabaseClient
           tx.run(query);
         }
       });
+    },
+    watchTables: listener => {
+      const subscription = addDatabaseChangeListener(({ tableName }) => listener(tableName));
+
+      return () => subscription.remove();
     },
   };
 };

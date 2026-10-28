@@ -64,7 +64,7 @@ export class TrackRepository extends Repository {
 
     await this.client.runAtomic(queries);
 
-    const uid = this.findUidBySource(input.source, sourceId);
+    const uid = await this.findUidBySource(input.source, sourceId);
 
     if (!uid) {
       throw new Error(`Failed to add track (${sourceId})`);

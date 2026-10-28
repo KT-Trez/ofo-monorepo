@@ -13,6 +13,7 @@ export type DatabaseClient = {
   readonly db: BaseSQLiteDatabase<'sync' | 'async', any>;
   readonly genRandomUid: GenRandomUid;
   readonly runAtomic: RunAtomic;
+  readonly watchTables: WatchTables;
 };
 
 export type GenRandomUid = () => Uid;
@@ -25,3 +26,12 @@ export type GenRandomUid = () => Uid;
 export type RunAtomic = (queries: readonly AtomicQuery[]) => Promise<void>;
 
 export type Uid = `${string}-${string}-7${string}-${'8' | '9' | 'a' | 'b'}${string}-${string}`;
+
+/** Stops the listener passed to `WatchTables`. */
+export type Unwatch = () => void;
+
+/**
+ * Calls the listener with the name of every table that has just been written to.
+ * Returns a function that stops it. Live queries use it to know when to run again.
+ */
+export type WatchTables = (listener: (tableName: string) => void) => Unwatch;

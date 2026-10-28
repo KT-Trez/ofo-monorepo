@@ -1,7 +1,7 @@
+import { webcrypto } from 'node:crypto';
 import Sqlite from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
-import { webcrypto } from 'node:crypto';
 import { createRandomUidGenerator } from '../src/core/uid.ts';
 import type { DatabaseClient } from '../src/types.ts';
 
@@ -23,5 +23,7 @@ export const createTestClient = (): DatabaseClient => {
         }
       });
     },
+    // no live queries in tests
+    watchTables: () => () => {},
   };
 };

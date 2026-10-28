@@ -1,4 +1,4 @@
-import { asc, desc, eq } from 'drizzle-orm';
+import { asc, count, desc, eq } from 'drizzle-orm';
 import { keysAfter } from '../core/sort-key.ts';
 import { artist } from '../schema/artist.entity.ts';
 import { PlaylistSortMode, type PlaylistSortModes } from '../schema/playlist-local.constants.ts';
@@ -48,6 +48,21 @@ export class PlaylistRepository extends Repository {
     await this.client.runAtomic([
       this.client.db.update(playlist).set({ title: title.trim() }).where(eq(playlist.uid, uid)),
     ]);
+  }
+
+  selectAll() {
+    return this.client.db
+      .select({
+        isSyncEnabled: playlist.isSyncEnabled,
+        title: playlist.title,
+        trackCount: count(playlistTrack.trackUid),
+        uid: playlist.uid,
+      })
+      .from(playlist)
+      .leftJoin(playlistLocal, eq(playlistLocal.playlistUid, playlist.uid))
+      .leftJoin(playlistTrack, eq(playlistTrack.playlistUid, playlist.uid))
+      .groupBy(playlist.uid)
+      .orderBy(desc(playlistLocal.lastOpenedAt), desc(playlist.uid));
   }
 
   selectTracks(uid: string, sortMode: PlaylistSortModes) {

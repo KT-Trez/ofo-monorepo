@@ -4,6 +4,7 @@
   "sideEffects": false,
   "exports": {
     "./expo": "./src/drivers/expo.ts",
+    "./hooks/*": "./src/hooks/*.ts",
     "./repositories/*": "./src/repositories/*.ts",
     "./schema/*": "./src/schema/*.ts",
     "./types": "./src/types.ts"
@@ -20,23 +21,29 @@
     "@ofo/typescript-config": "workspace:*",
     "@types/better-sqlite3": "catalog:",
     "@types/node": "catalog:",
+    "@types/react": "catalog:",
     "better-sqlite3": "catalog:",
     "drizzle-kit": "catalog:",
     "expo-crypto": "catalog:",
     "expo-sqlite": "catalog:",
+    "react": "catalog:",
     "type-fest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {
     "expo-crypto": "catalog:",
-    "expo-sqlite": "catalog:"
+    "expo-sqlite": "catalog:",
+    "react": "catalog:"
   },
   "peerDependenciesMeta": {
     "expo-crypto": {
       "optional": true
     },
     "expo-sqlite": {
+      "optional": true
+    },
+    "react": {
       "optional": true
     }
   }
