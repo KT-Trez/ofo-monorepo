@@ -64,6 +64,14 @@ export default defineConfig({
         extends: true,
         test: {
           include: ['src/**/*.spec.ts'],
+          name: 'ui',
+          root: 'packages/ui',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          include: ['src/**/*.spec.ts'],
           name: 'ytdlp',
           root: 'packages/ytdlp',
         },

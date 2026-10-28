@@ -463,6 +463,9 @@ importers:
       '@ofo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      es-toolkit:
+        specifier: 'catalog:'
+        version: 1.52.0
       expo:
         specifier: 'catalog:'
         version: 57.0.27(@babel/core@7.29.7(supports-color@10.2.2))(@expo/metro-runtime@57.0.16)(expo-router@57.0.25)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.4(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.87.1(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(react-native@0.86.3(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.87.1(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.2.8)(supports-color@10.2.2))(react@19.2.8)(supports-color@10.2.2))(react-native@0.86.3(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.87.1(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.2.8)(supports-color@10.2.2))(react@19.2.8)(supports-color@10.2.2)(typescript@7.0.2)
@@ -539,6 +542,9 @@ importers:
       babel-preset-expo:
         specifier: 'catalog:'
         version: 57.0.14(@babel/core@7.29.7(supports-color@10.2.2))(@babel/runtime@7.29.7)(expo@57.0.27)(react-refresh@0.18.0)(supports-color@10.2.2)
+      type-fest:
+        specifier: 'catalog:'
+        version: 5.10.0
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -701,6 +707,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.3
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.18
       better-sqlite3:
         specifier: 'catalog:'
         version: 13.0.3
@@ -713,6 +722,9 @@ importers:
       expo-sqlite:
         specifier: 'catalog:'
         version: 57.0.4(expo@57.0.27)(react-native@0.86.3(@babel/core@7.29.7(supports-color@10.2.2))(@types/react@19.2.18)(react@19.2.8)(supports-color@10.2.2))(react@19.2.8)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.8
       type-fest:
         specifier: 'catalog:'
         version: 5.10.0
@@ -814,6 +826,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.2(@types/node@26.6.3)(@vitest/coverage-v8@5.0.2)(vite@8.3.3(@types/node@26.6.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/ytdlp:
     devDependencies:
@@ -6100,6 +6115,7 @@ packages:
 
   react-native-edge-to-edge@1.8.2:
     resolution: {integrity: sha512-9yhI/RpaXVkMqFKNHz72A7Vi8KrT6BqDcY8HOdck/so+qH0fq1EkIeNTSLplnoFW84DcLn2D7s9L/xfYSN8gyQ==}
+    deprecated: This package is deprecated. Set edgeToEdgeEnabled=true in android/gradle.properties instead.
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -13045,7 +13061,7 @@ snapshots:
       '@storybook/icons': 2.1.0(react@19.2.8)
       '@testing-library/dom': 10.4.2
       '@testing-library/jest-dom': 6.9.1
-      '@testing-library/user-event': 14.6.7(@test-library/dom@10.4.2)
+      '@testing-library/user-event': 14.6.7(@testing-library/dom@10.4.2)
       '@vitest/expect': 3.2.4
       '@vitest/spy': 3.2.4
       '@webcontainer/env': 1.1.1

@@ -4,6 +4,7 @@
   "sideEffects": false,
   "exports": {
     "./components/*": "./src/components/*/index.ts",
+    "./composite/*": "./src/composite/*/index.ts",
     "./theme/*": "./src/theme/*.ts"
   },
   "scripts": {
@@ -20,7 +21,8 @@
     "react-native-unistyles": "catalog:",
     "react-native-web": "catalog:",
     "type-fest": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "react-native": "catalog:",
